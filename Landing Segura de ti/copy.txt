@@ -1,0 +1,720 @@
+Segura de Ti — Copy completo de la landing
+Workshop · Instituto SanaMente· Mayo–Junio 2026
+01 · Barra superior (anuncio)
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Copy
+Preventa abierta · 37 lugares restantes · Cierra el 22 de mayo · Inicia 29 de mayo
+Barra sticky superior en desktop. En mobile mantener delgada, máximo una línea.
+Nota UX
+Priorizar urgencia real sin saturar.
+No usar carrusel aquí. Texto fijo, alto contraste.
+
+02 · Navegación
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Logo
+Segura de ti — Workshop · Wendy Requenes
+Logo a la izquierda. En mobile solo “Segura de ti”.
+Menú
+
+En mobile ocultar menú y dejar ancla al checkout desde el botón sticky.
+CTA nav
+
+En mobile reemplazar por sticky inferior.
+
+03 · Hero
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Eyebrow
+Preventa abierta · 37 lugares
+Pequeño, arriba del H1. Debe reforzar escasez.
+H1
+No eres insegura. Estás herida.
+Pantalla 1 mobile. Tipografía grande. Mucho aire. Máximo impacto.
+Subhead
+Y mientras no veas eso… vas a seguir dudando, callándote y haciéndote pequeña para no incomodar.
+Pantalla 2 mobile. Dividir en 2–3 líneas.
+Reencuadre
+No es falta de seguridad. Es una herida decidiendo por ti.
+Pantalla 3 mobile. Usar énfasis visual en “herida”.
+Nombre programa
+SEGURA DE TIRecupera tu seguridad en 3 sesiones y deja de abandonarte sin darte cuenta.
+Pantalla 4 mobile. Añadir sello “3 sesiones en vivo”.
+Lista de dolor
+• Hablas bajito para no molestar.• Dices “sí” cuando quieres decir “no”.• Esperas aprobación para sentirte suficiente.
+Convertir en cards cortas o bullets con iconos mínimos.
+CTA primario
+Sí, esto es para mí
+Usar botón principal visible. En mobile repetir CTA al cierre de esta sección si el bloque supera 2 pantallas.
+CTA secundario
+Ver cómo funciona
+Ancla a temario. Menor jerarquía que el CTA primario.
+Trust badges
+Garantía de satisfacción · Grabaciones disponibles por 2 meses · Acompañamiento personalizado y grupo de apoyo durante 2 meses.
+Mostrar como chips horizontales scrollables en mobile.
+
+04 · Mini-diagnóstico (Quiz)
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Intro
+Antes de seguir, respóndete esto:No lo que dices en voz alta. Lo que pasa dentro de ti.
+Abrir con bloque de texto corto antes del quiz.
+Eyebrow
+Mini-diagnóstico · 60 seg
+Mantener como etiqueta.
+Pregunta 1
+¿Cómo te sientes antes de hablar en una reunión importante?
+Una pregunta por pantalla/tarjeta.
+Opciones 1
+• El corazón se me acelera y ensayo cada palabra• Pienso “mejor me quedo callada”• Hablo, pero me juzgo después por horas• Depende del día, voy por rachas
+Botones grandes táctiles. Evitar radio buttons pequeños.
+Pregunta 2
+Cuando alguien te elogia, ¿qué haces por dentro?
+
+Opciones 2
+• Lo minimizo o digo “fue suerte”• Me incomoda, cambio de tema• Lo recibo, pero no me lo creo del todo• Siento que no me lo merezco
+
+Pregunta 3
+¿Qué tan seguido dices “sí” cuando querías decir “no”?
+
+Opciones 3
+• Casi siempre, odio decepcionar• Varias veces por semana• A veces, y me arrepiento• Estoy aprendiendo a poner límites
+
+Resultado — Eyebrow
+Tu lectura
+
+Resultado — Título
+Tu nivel de confianza actual es —
+Resultado dinámico según lógica existente.
+Texto resultado
+Este workshop está diseñado para ayudarte a dejar de vivir desde esa herida y empezar a sostenerte desde tu valor.
+
+CTAs resultado
+Ver cómo funciona · Volver a responder
+CTA primario ancla a temario.
+
+05 · Marquee de credenciales
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Etiquetas en marquesina
+✦ Terapia Familiar Breve · Hipnosis Clínica · Psicología Positiva · Acompañamiento personalizado y grupo de apoyo durante 2 meses · Instituto SanaMente · +10 años de práctica
+Marquesina suave. En mobile velocidad lenta, sin marear.
+
+06 · Espejo / Te reconoces (problema)
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Eyebrow
+Te reconoces
+
+H2
+¿Estás cansada de sentir que los demás avanzan mientras tú te quedas recalculando el siguiente paso?
+H2 fuerte, máximo 3 líneas mobile.
+Párrafo 1
+Ese nudo en el estómago antes de hablar.Esa voz que aparece justo cuando ibas a avanzar: “mejor no…”Esa duda constante de: “¿seré suficiente?”
+Convertir en pantallas cortas de scroll, no párrafo largo.
+Párrafo 2
+Te haces pequeña para no incomodar.Evitas conflictos… aunque te cueste a ti.Buscas validación que nunca termina de llegar.
+Cards separadas con mucho aire.
+Reencuadre
+No es falta de capacidad.Es un sistema de creencias que aprendiste… y nunca cuestionaste.
+Usar bloque destacado.
+CTA
+Quiero cambiar esto
+Usar botón principal visible. En mobile repetir CTA al cierre de esta sección si el bloque supera 2 pantallas.
+
+07 · Workshop Info (logo + fechas + countdown)
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Edición
+Edición Mayo–Junio 2026
+
+Impartido por
+Wendy Requenes
+Añadir foto de Wendy si está disponible.
+Fechas en vivo
+Jueves 29 de mayo, 5 y 12 de junio · 7:00 – 9:30 pm CDMX
+Mostrar como timeline compacto.
+Countdown label
+Preventa cierra en
+
+Countdown
+08 días : 14 hrs : 32 min : 05 seg
+Temporizador real. No hardcodear si la landing está activa.
+Precio (hero)
+$69 USD
+Precio visible junto al CTA.
+Microcopy
+No necesitas más tiempo. Necesitas usarlo distinto.
+Colocar antes del CTA.
+CTA
+Quiero mi lugar
+Usar botón principal visible. En mobile repetir CTA al cierre de esta sección si el bloque supera 2 pantallas.
+
+08 · El Workshop (Temario / 3 sesiones)
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Eyebrow
+El workshop
+
+H2
+Tres sesiones en vivo para dejar de vivir desde la herida que te hace dudar de ti.
+Más emocional que descriptivo.
+Subhead
+No es otro curso de “piensa positivo”. Es trabajo clínico real en grupo, conducido por Wendy Requenes, integrando hipnosis clínica, terapia breve y psicología humanista para ir al origen, no a los síntomas.
+
+Sesión 01 — Fecha
+Viernes 29 · Mayo
+
+Sesión 01 — Título
+No eres insegura. Estás herida.
+
+Sesión 01 — Descripción
+Vas a identificar la herida emocional que está dirigiendo tu vida: rechazo, abandono, humillación, traición o injusticia. Vas a ponerle nombre a esa voz que te dice “no soy suficiente”, “me van a dejar”, “algo está mal conmigo”, “no puedo confiar” o “tengo que ser perfecta”.Incluye: Dinámica “La historia que nunca conté”. Sesión de hipnosis “Un encuentro conmigo”.
+Usar acordeón o card expandible. Mobile: mostrar título + beneficio, expandir detalle.
+Sesión 01 — Horario
+7:00 – 9:30 pm CDMX
+
+Sesión 02 — Fecha
+Viernes 5 · Junio
+
+Sesión 02 — Título
+Así se ve tu herida en tu vida actual.
+
+Sesión 02 — Descripción
+Vas a ver cómo tu herida se filtra en tus relaciones, tu autoexigencia, tu comparación, la búsqueda de validación, la culpa, el estancamiento y la procrastinación. También vas a aprender a poner límites sin sentir que estás haciendo algo malo.Incluye: Dinámica “El espejo incómodo”.Sesión de hipnosis “Soy suficiente”.
+
+Sesión 02 — Horario
+7:00 – 9:30 pm CDMX
+
+Sesión 03 — Fecha
+Viernes 12 · Junio
+
+Sesión 03 — Título
+La mujer que serías si dejaras de abandonarte.
+
+Sesión 03 — Descripción
+Vas a construir tu primera historia de seguridad y confianza. Conectarás con la mujer que se elige, pone límites, no negocia su valor y no se abandona por amor. Vas a definir cómo piensa, cómo actúa y qué ya no permite una mujer segura.Incluye: Visualización “El campo de todas las posibilidades”. Sesión de hipnosis “Mujer Poderosa”.Aprendizajes finales.
+
+Sesión 03 — Horario
+7:00 – 9:30 pm CDMX
+
+Logística — Formato
+Zoom en vivo + Comunidad privada de WhatsApp
+
+Logística — Duración
+3 semanas · 7.5 hrs
+
+Logística — Grupo
+Personalizado
+
+Logística — Idioma
+Español
+
+CTA
+Quiero vivir esto
+Usar botón principal visible. En mobile repetir CTA al cierre de esta sección si el bloque supera 2 pantallas.
+
+09 · Transformación (Antes / Después)
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Eyebrow
+La transformación
+
+H2
+De pedir permiso a ocupar tu espacio.
+
+Subhead
+No es magia. Es reprogramación profunda. Esto es lo que empieza a cambiar cuando atraviesas las tres sesiones.
+
+Antes — Título
+La versión que pide perdón por existir.
+
+Antes — Lista
+• Evito conflictos aunque me cueste la dignidad.• Me hago pequeña para no incomodar.• Cargo con culpa por cosas que no me tocaban.• Busco afuera una aprobación que no puedo darme.• Sobre-explico para no ser juzgada.
+Usar columna/card “Antes”.
+Después — Título
+La versión segura de ti.
+
+Después — Lista
+• Pongo límites sin guion ni ensayo previo.• Ocupo mi lugar sin pedir permiso para estar.• Devuelvo lo que no es mío — y duermo tranquila.• Me valido desde adentro, sin aplauso externo.• Hablo con claridad, sin disculpas prefabricadas.
+Usar columna/card “Después”. En mobile apilar Antes → Después.
+Cierre
+Eso es seguridad: dejar de negociar tu valor para ser elegida.
+Bloque destacado.
+CTA
+Quiero convertirme en esa versión
+Usar botón principal visible. En mobile repetir CTA al cierre de esta sección si el bloque supera 2 pantallas.
+
+10 · Qué incluye (6 piezas)
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Eyebrow
+Qué incluye
+
+H2
+Todo lo que recibes al inscribirte.
+
+Subhead
+Seis piezas diseñadas para trabajar juntas — cada una con propósito clínico, no relleno.
+
+01 · Etiqueta
+Encuentro clínico en grupo
+
+01 · Título
+3 sesiones en vivo
+
+01 · Descripción
+7.5 horas de trabajo clínico en grupo con Wendy, diseñadas como un arco terapéutico completo.
+
+01 · Bullets
+• 2.5 hrs · por sesión• Jueves · 7:00 pm CDMX• Zoom en vivo
+
+02 · Etiqueta
+Reprogramación profunda
+
+02 · Título
+Hipnosis clínica guiada
+
+02 · Descripción
+3 inducciones específicas para reprogramar creencias raíz, no afirmaciones vacías.
+
+02 · Bullets
+• Inducción clínica profesional• Método validado• Trabajo a nivel subconsciente
+
+03 · Etiqueta
+Material físico-digital
+
+03 · Título
+Workbook Segura de Ti
+
+03 · Descripción
+Cuaderno en PDF de 48 páginas con mapas sistémicos, prompts y ejercicios entre sesión y sesión.
+
+03 · Bullets
+• PDF · 48 páginas• Ejercicios dirigidos• Imprimible de por vida
+
+04 · Etiqueta
+Acompañamiento entre semanas
+
+04 · Título
+Comunidad privada
+
+04 · Descripción
+Grupo cerrado de WhatsApp solo para tu grupo durante los 2 meses siguientes al taller.
+
+04 · Bullets
+• Solo para tu cohorte• Privado · cifrado E2E• 2 meses de acompañamiento
+
+05 · Etiqueta
+Integración subconsciente
+
+05 · Título
+Audios de refuerzo
+
+05 · Descripción
+3 audios de hipnosis (15 min c/u) para integrar cada sesión, descargables de por vida.
+
+05 · Bullets
+• 3 audios · 15 min c/u• Descargables de por vida• Ideales antes de dormir
+
+06 · Etiqueta
+Acceso extendido
+
+06 · Título
+Grabaciones disponibles por 2 meses
+
+06 · Descripción
+Revive cada sesión a tu ritmo durante 2 meses. Obtén retroalimentación y acompañamiento en la comunidad privada de WhatsApp.
+
+06 · Bullets
+• 3 grabaciones HD• 60 días de acceso• Dudas resueltas en comunidad
+
+Stack — Eyebrow
+El paquete completo
+
+Stack — Título
+Todo esto llega a tus manos.
+
+Stack — Subhead
+Seis piezas, un solo pago. Así se ve el inventario que recibes al inscribirte.
+
+Stack — Valor
+Valor real del paquete: USD $480 → USD $127
+Mantener si corresponde a la estrategia comercial del documento original.
+Stack — Microcopy
+Sin letra chica. Acceso completo a las seis piezas, desde el primer día.
+
+Stack — CTA
+Inscribirme al workshop
+Usar botón principal visible. En mobile repetir CTA al cierre de esta sección si el bloque supera 2 pantallas.
+
+11 · Wendy / Autoridad
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Eyebrow
+Quién te acompaña
+
+H2
+Wendy Requenes. La mentora que te lleva a la raíz, no al síntoma.
+
+Stat destacada
+3 generaciones graduadas
+Usar como badge cerca de la foto.
+Bio P1
+Como psicóloga especialista en Terapia Familiar Breve Sistémica e Hipnosis Clínica, Wendy lleva más de una década acompañando a mujeres a trabajar con lo que normalmente evitan: esas heridas que las frenan antes de empezar, o las hacen abandonarse cuando ya iban en camino.
+
+Bio P2
+No viene a decirte que “te quieras más”. Su método integra terapia breve, psicología humanista e hipnosis clínica para trabajar en la raíz, no en la superficie.
+
+Bio P3
+Fundadora del Instituto SanaMente. No promete atajos: propone trabajo profundo, sostenido y humano para transformar desde adentro.
+
+Podcast
+Podcast “Por el Placer de Vivir” del Dr. César Lozano
+
+Podcast desc
+Invitada recurrente por más de 10 años en uno de los podcasts de bienestar emocional con mayor alcance del mercado hispanohablante — México, EE.UU., Centro y Sudamérica, España.
+
+Stats
+10+ años invitada · 22 países de alcance · 500k+ escuchas/mes
+Mostrar stats en 3 tarjetas.
+Formación académica
+• Licenciatura en Comunicación — Universidad Autónoma de Nuevo León• Licenciatura en Psicología — Universidad del Valle de México• Maestría en Desarrollo Humano — Universidad Iberoamericana
+
+CTA
+Entrar al workshop de Wendy
+Usar botón principal visible. En mobile repetir CTA al cierre de esta sección si el bloque supera 2 pantallas.
+
+12 · Testimonios (estilo WhatsApp · placeholder)
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Eyebrow
+Voces reales de la comunidad
+
+H2
+Lo que pasa cuando recuperas tu seguridad.
+
+Subhead
+Mensajes compartidos con permiso, directamente del grupo privado de WhatsApp.
+
+Nota
+Las 6 burbujas de testimonio están marcadas como [placeholder] — falta colocar el copy real de cada testimonio.
+No inventar testimonios. Mantener placeholders hasta tener capturas o copy autorizado.
+Intro UX
+Esto es lo que pasa cuando alguien deja de abandonarse:
+Usar antes de las burbujas.
+Testimonio 1
+[placeholder]
+Burbuja estilo WhatsApp.
+Testimonio 2
+[placeholder]
+Burbuja estilo WhatsApp.
+Testimonio 3
+[placeholder]
+Burbuja estilo WhatsApp.
+Testimonio 4
+[placeholder]
+Burbuja estilo WhatsApp.
+Testimonio 5
+[placeholder]
+Burbuja estilo WhatsApp.
+Testimonio 6
+[placeholder]
+Burbuja estilo WhatsApp.
+CTA
+Yo también quiero cruzar
+Usar botón principal visible. En mobile repetir CTA al cierre de esta sección si el bloque supera 2 pantallas.
+
+13 · Bonos (solo primeras 20)
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Eyebrow
+Stack de bonos
+
+H2
+Solo para las primeras 20 inscritas, también recibes.
+
+Subhead
+Dos regalos exclusivos con valor real de $103 USD, pensados para sostener la transformación en tu día a día — más allá de las sesiones en vivo.
+
+Bono #01
+Diario “21 días de reclamo” — Valor $49
+
+Bono #01 desc
+Journal terapéutico impreso (PDF imprimible) con un micro-ejercicio diario para reconstruir tu voz interior.
+
+Bono #02
+Playlist de anclaje sonoro — Valor $54
+
+Bono #02 desc
+Audio-guías breves (3–7 min) para pre-juntas, antes de dormir, o en la bocina del coche.
+
+Total
+Valor total del paquete: $192 → $69 USD · Workshop + 2 bonos exclusivos · tarifa preventa
+Resaltar visualmente. No ocultar condiciones.
+CTA
+Reclamar mi paquete
+Usar botón principal visible. En mobile repetir CTA al cierre de esta sección si el bloque supera 2 pantallas.
+
+14 · Objeciones
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Eyebrow
+Barreras honestas
+
+H2
+“Sí, pero ¿y si…?”
+
+Subhead
+La voz que te retiene tiene argumentos ensayados. Vamos a escucharla y a responderle.
+
+Obj 1
+“No tengo tiempo.” — Son tres noches, un jueves a la semana. Menos tiempo que el que ya inviertes repasando conversaciones en tu cabeza a las 2 am. Además, si te pierdes una, la grabación te espera 60 días.
+Formato acordeón.
+Obj 2
+“No es el mejor momento económicamente.” — Lo que gastas en un fin de semana para desconectarte puede ser lo mismo que te cuesta empezar a cambiar lo que te pesa todos los días.
+
+Obj 3
+“Ya intenté miles de cosas.” — Y por eso este workshop no es contenido suelto: es intervención clínica. La hipnosis clínica va a lo profundo, donde la fuerza de voluntad muchas veces ya no alcanza.
+
+Obj 4
+“Me da pena estar en grupo.” — La intimidad del grupo es una invitación, nunca una exigencia. Wendy sostiene un espacio seguro donde puedes compartir sin sentirte expuesta.
+
+Obj 5
+“¿Y si la hipnosis no me hace efecto?” — No es hipnosis de espectáculo. La hipnosis clínica es una herramienta segura y profesional. Puedes experimentar una relajación profunda..
+
+Obj 6
+“Me asusta remover lo que ya tengo dormido.” — Lo dormido sigue manejando tu vida desde abajo. Aquí lo tocamos en un entorno contenido, con una terapeuta profesional al frente y un grupo de mujeres en el mismo proceso.
+
+Garantía — Eyebrow
+Garantía honesta
+
+Garantía — Título
+Si asistes a las 3 sesiones y vives el acompañamiento de 2 meses, pero sientes que no te ayudó, te devolvemos el 100%.
+Visual badge de garantía.
+Garantía — Texto
+Sin formularios, sin “demuéstrame por qué”. Escribes un email y listo. No queremos tu dinero si no es tu momento.
+
+CTA
+Voy con todo
+Usar botón principal visible. En mobile repetir CTA al cierre de esta sección si el bloque supera 2 pantallas.
+
+15 · Comparativo de inversión
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Eyebrow
+Inversión real
+
+H2
+¿Cuánto te cuesta no resolver esto?
+
+Subhead
+Lo que gastas en un fin de semana distrayéndote de esa voz — vs. la inversión que empieza a desactivarla desde la raíz.
+
+Columna A — Título
+Un fin de semana de distracción — La cuenta que se repite
+En mobile apilar como card 1.
+Columna A — Lista
+• Cena + drinks para desconectar — $55• Compras compulsivas — $100+• Café + scroll de domingo — $18• Streaming + delivery — $32
+
+Columna A — Total
+Total del fin de semana: $205+ USD
+Resaltar.
+Columna B — Título
+Una sola vez — Inversión en tu seguridad
+En mobile apilar como card 2 con color/contraste superior.
+Columna B — Lo que se queda contigo
+• 3 sesiones en vivo con Wendy• 2 meses de acompañamiento en comunidad• Audios de hipnosis clínica permanentes• Workbook + diario + playlist
+
+Columna B — Tarifa
+Tarifa preventa: $69 (regular $89)
+Botón cerca del precio.
+Cierre
+Por menos de un tercio de lo que ya gastas desconectándote, empiezas a trabajar la raíz de por qué necesitas desconectarte.
+Bloque de cierre antes del CTA.
+CTA
+Invertir en mí esta vez
+Usar botón principal visible. En mobile repetir CTA al cierre de esta sección si el bloque supera 2 pantallas.
+
+16 · FAQ
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Eyebrow
+Preguntas frecuentes
+
+H2
+Todo lo que quieres saber.
+
+Intro
+Si sigues aquí, probablemente esto es lo que te estás preguntando:
+Añadir antes del acordeón.
+Q1
+¿Puedo asistir si vivo en Estados Unidos u otro país?
+
+A1
+Sí. El taller es 100% en línea por Zoom. Jueves 29 de mayo, 5 y 12 de junio de 7:00 a 9:30 pm hora CDMX (GMT-6). Revisa tu diferencia horaria al inscribirte.
+
+Q2
+¿Necesito experiencia previa en desarrollo personal o terapia?
+
+A2
+Para nada. El taller está diseñado para mujeres en cualquier punto de su camino — desde quienes nunca han ido a terapia hasta quienes llevan años trabajándose.
+
+Q3
+¿Qué pasa si no puedo asistir a una sesión en vivo?
+
+A3
+Cada sesión queda grabada y disponible en tu portal por 60 días. Puedes verla al día siguiente y mantenerte al ritmo de la cohorte.
+
+Q4
+¿La hipnosis clínica es segura?
+
+A4
+Sí. Es una herramienta usada en contextos clínicos. Wendy tiene certificación formal y más de una década aplicándola. 
+
+Q5
+¿Qué métodos de pago aceptan?
+
+A5
+PayPal, Mercado Pago, y tarjeta de crédito/débito vía Stripe. Aceptamos tarjetas internacionales. Puedes pagar de contado o en dos parcialidades sin recargo.
+
+Q6
+¿Este taller reemplaza terapia individual?
+
+A6
+No. Es un acompañamiento grupal enfocado y potente, pero no sustituye un proceso terapéutico personal si lo necesitas. Wendy te orientará si detecta que necesitas seguimiento individual.
+
+
+17 · Checkout
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Eyebrow
+Reserva tu lugar
+
+H2
+Un clic te separa de dejar de seguir igual.
+
+Subhead
+Inscripción segura. Confirmación inmediata. Acceso al portal privado en menos de 5 minutos.
+
+Resumen — Título
+Tu inscripción
+
+Resumen — Producto
+Workshop Segura de Ti — Edición mayo-junio · 3 sesiones en vivo
+
+Resumen — Incluye
+• 3 sesiones en vivo por Zoom• Workbook Segura de Ti (PDF)• 3 audios de hipnosis descargables• Grabaciones disponibles por 2 meses• Comunidad privada WhatsApp• 2 bonos exclusivos (valor $103) · solo primeras 20
+
+Desglose
+Precio regular: $89 USDDescuento preventa: − $20.00 USDBonos: IncluidosTotal hoy: $69 USD
+Mostrar total grande, muy visible.
+Métodos de pago
+Stripe (Visa · Mastercard · Amex) · PayPal (cuenta o tarjeta) · Mercado Pago (MXN · ARS · BRL · COP)
+
+Stripe — copy
+VISA · MC · AMEX
+
+PayPal — copy
+Te redirigiremos a PayPal — Al confirmar, abrimos tu cuenta de PayPal en una nueva ventana para completar el pago de forma segura.
+
+Mercado Pago — copy
+Paga en tu moneda local: MXN $1,380 · ARS $69,000 · BRL R$345 · COP $280,000. Se abrirá el checkout de Mercado Pago para terminar la compra con tarjeta, efectivo o saldo.
+
+Botón final
+Confirmar inscripción · $69 USD
+Botón principal más fuerte de toda la landing.
+Microcopy legal
+Al continuar aceptas los Términos y nuestra Política de Privacidad. Garantía de reembolso 100% tras la primera sesión.
+
+Pie de pagos
+Procesadores de pago certificados
+
+
+18 · Footer
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Logo
+Segura de ti — Un programa del Instituto SanaMente
+
+Bajada
+Transformación profunda envuelta en un formato accesible. Porque la seguridad en una misma no es un lujo, es tu derecho.
+
+Contacto
+• wendy@institutosanamente.com• WhatsApp +52 55 2345 6789• Monterrey · MX
+
+Legales
+• Términos y condiciones• Política de privacidad• Política de reembolso
+
+Copyright
+© 2026 Instituto SanaMente. Todos los derechos reservados. — Hecho con intención.
+
+
+19 · Sticky CTA móvil
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Etiqueta
+Preventa
+Sticky inferior en mobile desde el hero hasta checkout.
+Texto
+Cierra el 22 de mayo · $69 USD
+Texto corto. No ocupar más de 2 líneas.
+CTA
+Inscribirme
+Botón fijo. Debe anclar al checkout.
+Regla UX
+No tapar contenido. Añadir padding inferior a toda la landing.
+Altura sugerida: 72–84 px.
+
+20 · Indicaciones globales para Claude Design
+Campo
+Copy final / contenido
+Indicaciones para Claude Design
+Prioridad
+Mobile first absoluto. Diseñar para pantalla de celular.
+No convertir la versión desktop en mobile comprimido.
+Ritmo de scroll
+Cada bloque debe tener una sola idea emocional: espejo → validación → reencuadre → camino.
+Evitar paredes de texto.
+CTAs
+Repetir CTA después de Hero, Problema, Temario, Qué incluye, Bonos, Testimonios, Comparativo y Checkout.
+Mantener sticky CTA inferior en mobile.
+Heatmap thinking
+Zonas calientes: Hero, Problema, Transformación, Precio/Checkout. Ahí debe haber más contraste, copy más directo y CTA cercano.
+El usuario debe poder comprar sin leer toda la landing.
+Componentes recomendados
+Hero en pantallas cortas, cards para dolor, acordeones para sesiones/FAQ, timeline para fechas, cards apiladas para Antes/Después e Incluye.
+
+Microinteracciones
+Fade-in suave en frases clave. Botones con feedback táctil. Marquee lenta. Countdown real.
+No usar animaciones que distraigan del copy.
+Diseño visual
+Mantener todos los colores originales. Minimalista, alto contraste, mucha respiración, tipografía grande, estética cálida/profesional.
+Evitar estética de curso genérico o demasiado clínica.
+Testimonios
+Mantener placeholders hasta que existan textos/capturas aprobadas. No inventar resultados.
+
+Regla de copy
+No suavizar frases incómodas. El tono debe ser humano, firme y directo: no gurú, no clínico frío.
+
+
