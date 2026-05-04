@@ -1434,134 +1434,153 @@ tailwind.config = {
     .rec-dot { animation: none; }
   }
 
-  /* ═════════ Testimonials · WhatsApp bubbles ═════════ */
-  .wa-stage {
-    background:
-      radial-gradient(120% 60% at 50% 0%, rgba(122,31,46,.10), transparent 60%),
-      linear-gradient(180deg, #ECE0D2 0%, #E4D4C2 100%);
-    border-radius: 22px;
-    padding: 18px 14px 22px;
-    border: 1px solid rgba(122,31,46,.12);
-    box-shadow: 0 14px 40px -20px rgba(42,7,18,.18);
-    position: relative;
+  /* ═════════ Testimonials · WhatsApp authentic ═════════ */
+  /* Phone shell */
+  .wa-phone {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px -8px rgba(0,0,0,.22), 0 0 0 1px rgba(0,0,0,.06);
+    display: flex;
+    flex-direction: column;
+    max-width: 380px;
+    margin: 0 auto;
   }
-  @media (min-width: 768px) {
-    .wa-stage { padding: 28px 26px 34px; border-radius: 26px; }
+  /* WhatsApp top bar */
+  .wa-bar {
+    background: #128C7E;
+    padding: 10px 14px 10px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-shrink: 0;
   }
-  /* WhatsApp doodle background pattern (subtle) */
-  .wa-stage::before {
-    content: '';
-    position: absolute; inset: 0;
-    border-radius: inherit;
-    background-image:
-      radial-gradient(circle at 18% 22%, rgba(122,31,46,.04) 0 2px, transparent 3px),
-      radial-gradient(circle at 78% 38%, rgba(122,31,46,.035) 0 2px, transparent 3px),
-      radial-gradient(circle at 42% 72%, rgba(122,31,46,.04) 0 2px, transparent 3px),
-      radial-gradient(circle at 88% 88%, rgba(122,31,46,.03) 0 2px, transparent 3px);
-    pointer-events: none;
+  .wa-bar-back {
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    opacity: .9;
   }
-  .wa-stage > * { position: relative; z-index: 1; }
+  .wa-bar-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .wa-bar-info { flex: 1; min-width: 0; }
+  .wa-bar-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px; font-weight: 600;
+    color: #fff;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .wa-bar-status {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px; color: rgba(255,255,255,.78);
+    margin-top: 0.5px;
+  }
+  .wa-bar-icons {
+    display: flex; gap: 14px; align-items: center; color: rgba(255,255,255,.88);
+  }
 
-  .wa-day {
+  /* Chat area */
+  .wa-chat {
+    flex: 1;
+    background-color: #E5DDD5;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8b9a8' fill-opacity='0.13'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    padding: 10px 10px 12px;
+    display: flex; flex-direction: column; gap: 4px;
+    min-height: 300px;
+  }
+
+  /* Date chip */
+  .wa-date-chip {
     align-self: center;
-    display: inline-block;
-    margin: 4px auto 14px;
-    padding: 4px 12px;
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.78);
+    backdrop-filter: blur(4px);
     border-radius: 8px;
-    font-size: 10px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: #8A6E78;
-    box-shadow: 0 1px 2px rgba(42,7,18,.06);
+    padding: 3px 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    color: #667781;
+    margin: 4px 0 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.08);
   }
 
+  /* Bubble base */
   .wa-bubble {
     position: relative;
-    max-width: 88%;
-    padding: 10px 13px 18px;
-    border-radius: 14px;
-    font-size: 14px;
-    line-height: 1.45;
-    color: #1A0A10;
-    box-shadow: 0 1px 1px rgba(42,7,18,.10);
-    margin-bottom: 8px;
+    max-width: 92%;
+    padding: 6px 10px 18px;
+    border-radius: 7.5px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #111B21;
+    box-shadow: 0 1px 1px rgba(0,0,0,.12);
     word-wrap: break-word;
-  }
-  @media (min-width: 768px) {
-    .wa-bubble { font-size: 15px; max-width: 78%; }
+    white-space: pre-line;
   }
   .wa-bubble.wa-them {
     background: #FFFFFF;
-    border-top-left-radius: 4px;
+    border-top-left-radius: 0;
     align-self: flex-start;
     margin-right: auto;
   }
-  .wa-bubble.wa-mine {
-    background: #F2E0CE;
-    border-top-right-radius: 4px;
-    align-self: flex-end;
-    margin-left: auto;
+  .wa-bubble.wa-them::before {
+    content: '';
+    position: absolute; top: 0; left: -8px;
+    border-width: 0 8px 8px 0;
+    border-style: solid;
+    border-color: transparent #FFFFFF transparent transparent;
   }
   .wa-bubble .wa-name {
     display: block;
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 700;
-    color: #7A1F2E;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
     letter-spacing: .01em;
   }
   .wa-bubble .wa-meta {
     position: absolute;
-    right: 10px;
-    bottom: 4px;
+    right: 8px; bottom: 4px;
     font-size: 10px;
-    color: #8A6E78;
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
+    color: #667781;
+    display: inline-flex; align-items: center; gap: 2px;
+    font-family: 'Inter', sans-serif;
   }
-  .wa-bubble.wa-mine .wa-meta { color: #6E4A76; }
-  .wa-bubble.wa-placeholder {
-    background: repeating-linear-gradient(135deg, rgba(122,31,46,.06) 0 1px, rgba(255,255,255,.92) 1px 9px);
-    color: #8A6E78;
-    border: 1px dashed rgba(122,31,46,.25);
-    font-style: italic;
+  .wa-bubble .wa-checks { color: #53BDEB; font-size: 12px; }
+
+  /* Input bar */
+  .wa-input-bar {
+    background: #F0F2F5;
+    padding: 8px 10px;
+    display: flex; align-items: center; gap: 8px;
+    border-top: 1px solid #E0E0E0;
+    flex-shrink: 0;
   }
-  .wa-bubble.wa-mine.wa-placeholder {
-    background: repeating-linear-gradient(135deg, rgba(192,139,92,.10) 0 1px, #F2E0CE 1px 9px);
+  .wa-input-field {
+    flex: 1; background: #fff; border-radius: 22px;
+    padding: 8px 14px;
+    font-family: 'Inter', sans-serif; font-size: 12.5px;
+    color: #667781;
+    box-shadow: 0 1px 2px rgba(0,0,0,.06);
   }
-  .wa-tail-them::after, .wa-tail-mine::after {
-    content: '';
-    position: absolute; top: 0;
-    width: 10px; height: 12px;
-  }
-  .wa-tail-them::after {
-    left: -6px;
-    background: #FFFFFF;
-    clip-path: polygon(0 0, 100% 0, 100% 100%);
-    border-top-left-radius: 2px;
-  }
-  .wa-tail-mine::after {
-    right: -6px;
-    background: #F2E0CE;
-    clip-path: polygon(0 0, 100% 0, 0 100%);
-    border-top-right-radius: 2px;
+  .wa-send-btn {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: #128C7E;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; flex-shrink: 0;
   }
 
-  /* Testimonial card column (one chat thread per card) */
-  .wa-thread {
-    display: flex; flex-direction: column;
-    gap: 0;
-  }
-  .wa-thread .wa-stage {
-    display: flex; flex-direction: column;
-  }
-  .wa-thread-head {
-    display: flex; align-items: center; gap: 10px;
-    padding: 4px 4px 14px;
-    border-bottom: 1px solid rgba(122,31,46,.08);
-    margin-bottom: 14px;
+  /* Legacy support: keep wa-stage for any remaining usages */
+  .wa-stage {
+    background: #E5DDD5;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px -8px rgba(0,0,0,.22);
   }
   .wa-thread-avatar {
     width: 38px; height: 38px; border-radius: 50%;
@@ -2911,6 +2930,12 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
               Como psicóloga, facilitadora de grupos y conferencista especializada en <b class="not-italic font-sans font-semibold text-wine-700">Desarrollo Humano</b>, <b class="not-italic font-sans font-semibold text-wine-700">Terapia Familiar Breve Sistémica</b> e <b class="not-italic font-sans font-semibold text-wine-700">Hipnosis Clínica</b>, llevo más de una década acompañando a mujeres a trabajar con lo que normalmente evitan: esas heridas que las hacen abandonar sus sueños, sus metas. Abandonarse a sí mismas.
             </p>
           </div>
+          <p class="mt-5 text-ink-500 text-[15.5px] leading-[1.72]">
+            No te voy a decir que "te quieras más". Mi método integra terapia breve, psicología humanista e hipnosis clínica. Va directo a la raíz, no a los síntomas. Por eso funciona.
+          </p>
+          <p class="mt-4 text-ink-500 text-[15.5px] leading-[1.72]">
+            Fundé el <b class="text-wine-700 font-semibold">Instituto de Desarrollo Personal SanaMente</b> con la misión de brindar herramientas y acompañamiento personalizado a través de workshops, certificaciones y diplomados para mujeres como tú. No prometo atajos, prometo el trabajo profundo que transforma desde adentro.
+          </p>
         </div>
 
         <!-- ── PODCAST AUTHORITY — acts as visual bridge between photo & formation ── -->
@@ -2939,7 +2964,7 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
             </svg>
 
             <div class="flex items-center gap-2 text-[10px] tracking-[.28em] uppercase text-rose-300 font-medium">
-              <i data-lucide="mic" class="w-3.5 h-3.5"></i> Por el placer de Vivir · Dr. César Lozano
+              <i data-lucide="mic" class="w-3.5 h-3.5"></i> Presencia en medios
             </div>
 
             <div class="mt-4 flex items-start gap-5">
@@ -2959,8 +2984,8 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
             <!-- Platform logos -->
             <div class="mt-5 pt-4 border-t border-cream-100/10 flex flex-wrap items-center gap-4">
               <span class="text-[9px] tracking-[.22em] uppercase text-cream-100/40">Escúchalo en</span>
-              <img src="assets/logo-uforia.png" alt="Uforia Podcasts" class="h-7 opacity-90 hover:opacity-100 transition-opacity" style="filter: brightness(1.15);" />
-              <img src="assets/logo-univision.svg" alt="Univisión" class="h-5 opacity-80 hover:opacity-100 transition-opacity" style="filter: brightness(0) invert(1);" />
+              <img src="assets/logo-uforia.png" alt="Uforia Podcasts" class="h-20 opacity-95 hover:opacity-100 transition-opacity" style="filter: brightness(1.1);" />
+              <img src="assets/logo-univision.svg" alt="Univisión" class="h-16 opacity-95 hover:opacity-100 transition-opacity" />
             </div>
 
             <div class="mt-5 pt-5 border-t border-cream-100/10 grid grid-cols-3 gap-3 text-center">
@@ -3076,78 +3101,123 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
       </p>
     </div>
 
-    <!-- Honesty note -->
-    <div class="reveal max-w-2xl mx-auto mb-8 md:mb-10 flex items-start gap-3 px-4 py-3 bg-cream-100/80 border border-wine-700/10 rounded-xl text-[12.5px] md:text-[13px] text-ink-500 leading-relaxed">
-      <i data-lucide="info" class="w-4 h-4 text-wine-700 mt-0.5 flex-shrink-0"></i>
-      <span>Mientras la cohorte mayo–junio se llena, dejamos los testimonios como <b class="text-wine-700">placeholders</b>. Aquí van los mensajes reales que las mujeres comparten al cierre del workshop — con captura y permiso.</span>
-    </div>
-
     <!-- Testimonials grid: 1 col mobile, 2 col tablet, 3 col desktop -->
-    <div class="grid gap-5 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-6 md:gap-7 sm:grid-cols-2 lg:grid-cols-3 items-start">
 
-      <!-- Thread 01 -->
-      <div class="reveal delay-1 wa-stage wa-thread">
-        <div class="wa-thread-head">
-          <div class="wa-thread-avatar">M</div>
-          <div class="wa-thread-meta">
-            <div class="wa-thread-name">[ Nombre ]</div>
-            <div class="wa-thread-sub"><span class="online-dot"></span> Cohorte · placeholder</div>
+      <!-- ══ Testimonio 01 · Zuly Ramírez ══ -->
+      <div class="reveal delay-1 wa-phone">
+        <!-- Header bar -->
+        <div class="wa-bar">
+          <div class="wa-bar-back">‹</div>
+          <div class="wa-bar-avatar" style="background:linear-gradient(135deg,#e84393,#9b1d6b)">Z</div>
+          <div class="wa-bar-info">
+            <div class="wa-bar-name">Zuly Ramírez</div>
+            <div class="wa-bar-status">Segura de Ti · Grupo privado</div>
           </div>
-          <span class="wa-thread-tag">01</span>
+          <div class="wa-bar-icons">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.79a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          </div>
         </div>
-        <span class="wa-day">después · sesión 01</span>
-        <div class="wa-bubble wa-them wa-tail-them wa-placeholder">
-          <span class="wa-name">[ Nombre, ciudad ]</span>
-          [ Testimonio 1 — pendiente. Aquí se coloca el mensaje original tal como llegó al grupo de WhatsApp, sin editar. ]
-          <span class="wa-meta">--:-- <i data-lucide="check-check" class="w-3.5 h-3.5"></i></span>
+        <!-- Chat body -->
+        <div class="wa-chat">
+          <div class="wa-date-chip">Ayer</div>
+          <div class="wa-bubble wa-them">
+            <span class="wa-name" style="color:#e84393">Zuly Ramírez</span>Desde mi corazón les comparto la transformación extraordinaria que he vivido durante todo este tiempo junto a mi querida Wendy.
+
+Puedo decirles que existen dos versiones de Zuly: una antes de Wendy y otra después de Wendy.
+
+Antes, Zuly era más ansiosa, más insegura, más controladora y con la mente llena de confusión.
+
+La Zuly del presente es SEGURA de sí misma, se acepta, se ama, suelta con mayor facilidad lo que ya no le corresponde y, sobre todo, se conoce mucho más profundamente.
+
+Estoy sumamente agradecida de que Wendy llegara a mi vida y me acompañara en cada proceso, en cada etapa y en cada transformación, a través de sus certificaciones, talleres y todo lo que comparte con tanto amor. ✨🙏
+            <span class="wa-meta">10:42 <span class="wa-checks">✓✓</span></span>
+          </div>
         </div>
-        <div class="wa-bubble wa-mine wa-tail-mine wa-placeholder">
-          [ Testimonio 2 — pendiente. Mensaje corto de seguimiento. ]
-          <span class="wa-meta">--:-- <i data-lucide="check-check" class="w-3.5 h-3.5"></i></span>
+        <!-- Input bar -->
+        <div class="wa-input-bar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667781" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          <div class="wa-input-field">Escribe un mensaje</div>
+          <div class="wa-send-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+          </div>
         </div>
       </div>
 
-      <!-- Thread 02 -->
-      <div class="reveal delay-2 wa-stage wa-thread">
-        <div class="wa-thread-head">
-          <div class="wa-thread-avatar">R</div>
-          <div class="wa-thread-meta">
-            <div class="wa-thread-name">[ Nombre ]</div>
-            <div class="wa-thread-sub"><span class="online-dot"></span> Cohorte · placeholder</div>
+      <!-- ══ Testimonio 02 · Guadalupe Velázquez ══ -->
+      <div class="reveal delay-2 wa-phone">
+        <div class="wa-bar">
+          <div class="wa-bar-back">‹</div>
+          <div class="wa-bar-avatar" style="background:linear-gradient(135deg,#7c3aed,#4c1d95)">G</div>
+          <div class="wa-bar-info">
+            <div class="wa-bar-name">Guadalupe Velázquez</div>
+            <div class="wa-bar-status">Segura de Ti · Grupo privado</div>
           </div>
-          <span class="wa-thread-tag">02</span>
+          <div class="wa-bar-icons">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.79a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          </div>
         </div>
-        <span class="wa-day">después · sesión 02</span>
-        <div class="wa-bubble wa-them wa-tail-them wa-placeholder">
-          <span class="wa-name">[ Nombre, ciudad ]</span>
-          [ Testimonio 3 — pendiente. Cita literal del grupo, idealmente con detalle concreto: qué pasó, qué cambió. ]
-          <span class="wa-meta">--:-- <i data-lucide="check-check" class="w-3.5 h-3.5"></i></span>
+        <div class="wa-chat">
+          <div class="wa-date-chip">Ayer</div>
+          <div class="wa-bubble wa-them">
+            <span class="wa-name" style="color:#7c3aed">Guadalupe Velázquez · Life Coach certificada</span>¿Alguna vez has sentido que tu mundo se viene abajo y que no hay salida?
+
+Yo estuve ahí. Sentí el estancamiento y el peso de las adversidades, pero hoy estoy aquí para decirte que <b>sí se puede dar vuelta a la página.</b> ✨
+
+Mi camino de transformación tuvo una pieza clave: <b>Wendy Requenes</b>.
+Gracias a su acompañamiento, logré transitar el dolor con compasión y transformar mis heridas de infancia en la fuerza que hoy me sostiene. 💜
+
+Por eso, te invito de todo corazón a formar parte del curso <b>Segura de ti</b>.
+
+Invertir en tu sanación no es un gasto, es el puente más directo hacia tu éxito personal y profesional.
+
+Si yo pude avanzar y hoy estoy construyendo mis sueños, ¡tú también puedes!
+
+Regálate la oportunidad de ser, finalmente, más <b>Segura de ti</b>.
+            <span class="wa-meta">11:15 <span class="wa-checks">✓✓</span></span>
+          </div>
         </div>
-        <div class="wa-bubble wa-mine wa-tail-mine wa-placeholder">
-          [ Testimonio 4 — pendiente. Reacción breve de otra participante. ]
-          <span class="wa-meta">--:-- <i data-lucide="check-check" class="w-3.5 h-3.5"></i></span>
+        <div class="wa-input-bar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667781" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          <div class="wa-input-field">Escribe un mensaje</div>
+          <div class="wa-send-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+          </div>
         </div>
       </div>
 
-      <!-- Thread 03 -->
-      <div class="reveal delay-3 wa-stage wa-thread sm:col-span-2 lg:col-span-1">
-        <div class="wa-thread-head">
-          <div class="wa-thread-avatar">A</div>
-          <div class="wa-thread-meta">
-            <div class="wa-thread-name">[ Nombre ]</div>
-            <div class="wa-thread-sub"><span class="online-dot"></span> Cohorte · placeholder</div>
+      <!-- ══ Testimonio 03 · Norma Martínez ══ -->
+      <div class="reveal delay-3 wa-phone sm:col-span-2 lg:col-span-1">
+        <div class="wa-bar">
+          <div class="wa-bar-back">‹</div>
+          <div class="wa-bar-avatar" style="background:linear-gradient(135deg,#0891b2,#164e63)">N</div>
+          <div class="wa-bar-info">
+            <div class="wa-bar-name">Norma Martínez</div>
+            <div class="wa-bar-status">Segura de Ti · Grupo privado</div>
           </div>
-          <span class="wa-thread-tag">03</span>
+          <div class="wa-bar-icons">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.79a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          </div>
         </div>
-        <span class="wa-day">después · sesión 03</span>
-        <div class="wa-bubble wa-them wa-tail-them wa-placeholder">
-          <span class="wa-name">[ Nombre, ciudad ]</span>
-          [ Testimonio 5 — pendiente. Cita de cierre: la frase que mejor describe el antes/después. ]
-          <span class="wa-meta">--:-- <i data-lucide="check-check" class="w-3.5 h-3.5"></i></span>
+        <div class="wa-chat">
+          <div class="wa-date-chip">Hoy</div>
+          <div class="wa-bubble wa-them">
+            <span class="wa-name" style="color:#0891b2">Norma Martínez</span>Para mí el haber aprendido acerca de las 5 heridas ha transformado mi vida. Son parte inevitable del proceso de vivir y relacionarnos con otros.
+
+Hoy tengo responsabilidad de elegir desde qué lugar tomar decisiones y cómo actuar con mis emociones. Aprendí que mi herida no me debilita, no la tapo, no la escondo, es parte de mí. Hoy la integro en conciencia y resiliencia. Hoy abrazo mi herida y aprendo a avanzar.
+
+Aprendí que sanar no es eliminar o borrar si no aprender de todo lo vivido para validar mis emociones. Hoy puedo identificar si mi emoción actúa desde mi herida.
+
+También me ha ayudado a entender mi dependencia emocional, he roto patrones, he mejorado mis relaciones e inicié mi camino a una vida más consciente y saludable emocionalmente.
+            <span class="wa-meta">09:28 <span class="wa-checks">✓✓</span></span>
+          </div>
         </div>
-        <div class="wa-bubble wa-mine wa-tail-mine wa-placeholder">
-          [ Testimonio 6 — pendiente. Mensaje audaz, idealmente con micro-resultado concreto. ]
-          <span class="wa-meta">--:-- <i data-lucide="check-check" class="w-3.5 h-3.5"></i></span>
+        <div class="wa-input-bar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667781" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          <div class="wa-input-field">Escribe un mensaje</div>
+          <div class="wa-send-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+          </div>
         </div>
       </div>
 
