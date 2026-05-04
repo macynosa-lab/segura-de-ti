@@ -341,6 +341,12 @@ tailwind.config = {
   @keyframes pulse-dot { 0%,100%{ opacity:1; transform: scale(1);} 50%{ opacity:.5; transform: scale(.6);} }
   .pulse-dot { animation: pulse-dot 1.4s ease-in-out infinite; }
 
+  /* ───── Preventa banner pulse ───── */
+  @keyframes preventa-pulse {
+    0%,100% { box-shadow: 0 12px 28px -6px rgba(201,82,63,.45), 0 0 0 0 rgba(232,130,107,.55); transform: translateY(0); }
+    50%     { box-shadow: 0 16px 36px -6px rgba(201,82,63,.6),  0 0 0 12px rgba(232,130,107,0); transform: translateY(-1px); }
+  }
+
   /* ───── Marquee ───── */
   @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
   .marquee-track { display:flex; width:max-content; animation: marquee 42s linear infinite;
@@ -423,7 +429,7 @@ tailwind.config = {
   @media (max-width: 767px) {
     .bezel { padding: 2px; }
     .incluye-row { gap: 1.75rem; margin-bottom: 4rem; }
-    .incluye-index { font-size: 72px; top: -1rem; left: 0; }
+    .incluye-index { font-size: 40px; top: -3rem; left: 0; }
     .incluye-title { font-size: 28px !important; }
     .incluye-body { font-size: 15px; }
   }
@@ -594,25 +600,37 @@ tailwind.config = {
 
   .incluye-visual {
     position: relative;
-    padding: 1rem;
+    padding: 3rem 1rem 1rem;
   }
   .incluye-index {
     position: absolute;
-    top: -1.5rem;
-    left: -.5rem;
+    display: inline-flex;
+    align-items: baseline;
+    gap: .35em;
+    top: -2.25rem;
+    left: 0;
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 700;
-    font-size: clamp(48px, 7vw, 88px);
+    font-size: clamp(40px, 6vw, 64px);
     line-height: 1;
-    color: rgba(122, 31, 46, 0.55);
+    color: #7A1F2E;
     pointer-events: none;
-    z-index: 2;
+    z-index: 5;
+    letter-spacing: -.01em;
+  }
+  .incluye-index::before {
+    content: "";
+    width: clamp(28px, 4vw, 56px);
+    height: 2px;
+    background: linear-gradient(90deg, #C08B5C, #7A1F2E);
+    align-self: center;
+    flex-shrink: 0;
   }
   @media (min-width: 768px) {
     .incluye-index {
-      top: -1rem;
-      left: -2rem;
+      top: -2.5rem;
+      left: 0;
     }
   }
   .incluye-text { position: relative; }
@@ -1138,9 +1156,9 @@ tailwind.config = {
   .stack-wrap {
     position: relative;
     width: 100%;
-    max-width: 860px;
+    max-width: 980px;
     margin: 0 auto;
-    height: 420px;
+    height: 560px;
   }
   @media (max-width: 767px) {
     .stack-wrap { height: 520px; transform: scale(.85); transform-origin: top center; }
@@ -1160,32 +1178,40 @@ tailwind.config = {
   .stack-item:hover { transform: translateY(-6px) rotate(0deg) !important; z-index: 20 !important; }
   .stack-label {
     position: absolute;
-    left: 50%; bottom: -22px;
+    left: 50%; bottom: -26px;
     transform: translateX(-50%);
-    font-size: 9px;
+    font-size: 9.5px;
     letter-spacing: .18em;
     text-transform: uppercase;
     color: #7A1F2E;
-    font-weight: 600;
+    font-weight: 700;
     white-space: nowrap;
-    opacity: .85;
+    opacity: .9;
+    background: rgba(250,243,234,.85);
+    padding: 3px 7px;
+    border-radius: 4px;
+    backdrop-filter: blur(2px);
   }
 
-  /* Positioning the stack items — asymmetric arrangement */
-  .stack-laptop    { top: 8%;  left: 6%;   width: 280px; transform: rotate(-6deg); z-index: 3; }
-  .stack-tablet    { top: 2%;  left: 38%;  width: 230px; transform: rotate(4deg);  z-index: 4; }
-  .stack-workbook  { top: 18%; right: 4%;  width: 240px; transform: rotate(8deg);  z-index: 2; }
-  .stack-phone-chat    { top: 42%; left: 22%; width: 100px; transform: rotate(-8deg); z-index: 6; }
-  .stack-phone-audio   { top: 48%; left: 46%; width: 100px; transform: rotate(3deg);  z-index: 7; }
-  .stack-headphones    { top: 52%; right: 12%; width: 140px; transform: rotate(-4deg); z-index: 5; }
+  /* Positioning the stack items — asymmetric arrangement (8 items, more breathing room) */
+  .stack-laptop      { top: 4%;  left: 2%;    width: 240px; transform: rotate(-6deg); z-index: 3; }
+  .stack-tablet      { top: 2%;  left: 30%;   width: 200px; transform: rotate(3deg);  z-index: 4; }
+  .stack-workbook    { top: 8%;  right: 16%;  width: 210px; transform: rotate(7deg);  z-index: 2; }
+  .stack-videos      { top: 12%; right: 0%;   width: 175px; transform: rotate(-3deg); z-index: 6; }
+  .stack-tasks       { top: 38%; left: 1%;    width: 95px;  transform: rotate(-9deg); z-index: 5; }
+  .stack-phone-chat  { top: 50%; left: 18%;   width: 95px;  transform: rotate(5deg);  z-index: 6; }
+  .stack-phone-audio { top: 54%; left: 38%;   width: 95px;  transform: rotate(-2deg); z-index: 7; }
+  .stack-headphones  { top: 58%; right: 22%;  width: 130px; transform: rotate(-5deg); z-index: 5; }
 
   @media (max-width: 767px) {
-    .stack-laptop    { top: 4%;  left: 2%;   width: 220px; }
-    .stack-tablet    { top: 0;   left: 42%;  width: 180px; }
-    .stack-workbook  { top: 15%; right: 2%;  width: 200px; }
-    .stack-phone-chat    { top: 55%; left: 12%; width: 90px; }
-    .stack-phone-audio   { top: 60%; left: 44%; width: 90px; }
-    .stack-headphones    { top: 62%; right: 4%; width: 120px; }
+    .stack-laptop      { top: 4%;  left: 2%;   width: 220px; }
+    .stack-tablet      { top: 0;   left: 42%;  width: 180px; }
+    .stack-workbook    { top: 15%; right: 2%;  width: 200px; }
+    .stack-videos      { display: none; }
+    .stack-tasks       { display: none; }
+    .stack-phone-chat  { top: 55%; left: 12%; width: 90px; }
+    .stack-phone-audio { top: 60%; left: 44%; width: 90px; }
+    .stack-headphones  { top: 62%; right: 4%; width: 120px; }
   }
 
   /* Mini laptop in stack */
@@ -1414,6 +1440,92 @@ tailwind.config = {
     aspect-ratio: 1;
     filter: drop-shadow(0 18px 28px rgba(74,15,31,.4));
   }
+
+  /* Mini "video card" mockup (07 · Videos reflexivos) */
+  .stack-mockup-videos {
+    width: 100%;
+    background: linear-gradient(180deg, #FAF3EA, #F4E4D3);
+    border: 1px solid rgba(122,31,46,.15);
+    border-radius: 10px;
+    padding: 10px;
+    filter: drop-shadow(0 18px 28px rgba(74,15,31,.4));
+  }
+  .stack-videos-thumb {
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #4A0F1F, #7A1F2E);
+    border-radius: 6px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .stack-videos-thumb::after {
+    content: "▶";
+    color: #F4E4D3;
+    font-size: 16px;
+  }
+  .stack-videos-thumb::before {
+    content: "";
+    position: absolute;
+    bottom: 4px; left: 6px; right: 6px;
+    height: 2px;
+    background: linear-gradient(90deg, #C9523F 35%, rgba(244,228,211,.3) 35%);
+    border-radius: 2px;
+  }
+  .stack-videos-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 7px;
+    font-size: 8px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #7A1F2E;
+    font-weight: 600;
+  }
+  .stack-videos-meta b { color: #2A0712; font-weight: 700; }
+
+  /* Mini "tasks" phone-card mockup (08 · Ejercicios) */
+  .stack-mockup-tasks {
+    width: 100%;
+    background: linear-gradient(180deg, #FAF3EA, #F4E4D3);
+    border: 1px solid rgba(122,31,46,.18);
+    border-radius: 12px;
+    padding: 8px 7px;
+    filter: drop-shadow(0 18px 28px rgba(74,15,31,.4));
+  }
+  .stack-tasks-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 6px;
+    background: #fff;
+    border-radius: 5px;
+    margin-bottom: 4px;
+    box-shadow: 0 1px 2px rgba(74,15,31,.08);
+  }
+  .stack-tasks-row:last-child { margin-bottom: 0; }
+  .stack-tasks-row .tk-box {
+    width: 9px; height: 9px;
+    border-radius: 2px;
+    border: 1.5px solid rgba(122,31,46,.4);
+    flex-shrink: 0;
+  }
+  .stack-tasks-row.done .tk-box {
+    background: #C9523F;
+    border-color: #C9523F;
+  }
+  .stack-tasks-row.active .tk-box {
+    border-color: #C9523F;
+    border-width: 2px;
+  }
+  .stack-tasks-row .tk-line {
+    flex: 1;
+    height: 4px;
+    background: rgba(122,31,46,.18);
+    border-radius: 2px;
+  }
+  .stack-tasks-row.done .tk-line { background: rgba(122,31,46,.1); }
+  .stack-tasks-row.active .tk-line { background: rgba(201,82,63,.5); }
 
   /* Sparkles */
   .stack-sparkle {
@@ -1778,13 +1890,11 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
 <!-- ═══════════ NAV ═══════════ -->
 <nav class="sticky top-0 z-40 backdrop-blur-xl bg-cream-100/90 border-b border-wine-700/10">
   <div class="max-w-7xl mx-auto flex items-center justify-between px-3 md:px-8 py-2.5 md:py-3">
-    <a href="#" class="flex items-center gap-2 md:gap-2.5">
-      <div class="w-8 h-8 md:w-9 md:h-9 rounded-lg bezel"><div class="bezel-inner w-full h-full flex items-center justify-center">
-        <span class="font-display font-bold text-lilac-500 text-xs md:text-sm leading-none">S</span>
-      </div></div>
-      <div class="leading-tight">
-        <div class="font-display text-base md:text-lg font-semibold text-wine-700">Segura <span class="script text-rose-500 text-lg md:text-xl">de ti</span></div>
-        <div class="text-[9px] md:text-[10px] tracking-[.22em] uppercase text-ink-300 -mt-1">Wendy Requenes</div>
+    <a href="#" class="flex items-center gap-2.5 md:gap-3">
+      <img src="assets/logo-segura-de-ti.png" alt="Segura de Ti" class="h-10 md:h-12 w-auto" style="filter: drop-shadow(0 4px 10px rgba(74,15,31,.15));" />
+      <div class="leading-tight border-l border-wine-700/15 pl-2.5 md:pl-3">
+        <div class="text-[10px] md:text-[11px] tracking-[.22em] uppercase text-wine-700 font-semibold">WORKSHOP ONLINE</div>
+        <div class="text-[9px] md:text-[10px] tracking-[.18em] uppercase text-ink-300 mt-0.5">DEJA DE PEDIR PERMISO PARA SER TÚ</div>
       </div>
     </a>
 
@@ -1846,7 +1956,7 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
       <div class="bezel-inner dark px-5 py-6 md:px-7 md:py-7" style="background: linear-gradient(135deg, rgba(42,7,18,.95), rgba(74,15,31,.95));">
         <div class="text-[10px] md:text-[11px] tracking-[.32em] uppercase text-rose-300 font-semibold">El workshop</div>
         <div class="flex items-baseline gap-3 mt-1.5 flex-wrap">
-          <span class="font-display lilac-text text-[36px] md:text-[48px] font-bold leading-none">SEGURA</span>
+          <span class="font-display text-rose-200 text-[36px] md:text-[48px] font-bold leading-none" style="text-shadow: 0 0 18px rgba(253,164,175,.35);">SEGURA</span>
           <span class="script rosegold-text rosegold-glow text-[30px] md:text-[40px] font-bold leading-none">de ti</span>
         </div>
         <p class="mt-3 text-cream-100/85 text-[14.5px] md:text-[16.5px] leading-[1.6]">
@@ -2001,16 +2111,16 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
           <div class="mt-3 text-[12px] text-ink-300">7:00 – 9:30 pm CDMX</div>
 
           <!-- Countdown -->
-          <div class="mt-6 inline-flex items-center gap-3 bg-wine-950 rounded-xl px-4 py-3">
-            <span class="text-[9.5px] tracking-[.22em] uppercase text-rose-300 font-semibold">Preventa cierra en</span>
-            <div id="workshop-countdown" class="flex items-end gap-1.5 text-cream-100">
-              <div class="text-center"><div class="font-display text-base leading-none" data-cd="d">08</div><div class="text-[8px] uppercase tracking-wider text-cream-100/50">d</div></div>
-              <span class="font-display text-sm text-rose-500/70">:</span>
-              <div class="text-center"><div class="font-display text-base leading-none" data-cd="h">14</div><div class="text-[8px] uppercase tracking-wider text-cream-100/50">h</div></div>
-              <span class="font-display text-sm text-rose-500/70">:</span>
-              <div class="text-center"><div class="font-display text-base leading-none" data-cd="m">32</div><div class="text-[8px] uppercase tracking-wider text-cream-100/50">m</div></div>
-              <span class="font-display text-sm text-rose-500/70">:</span>
-              <div class="text-center"><div class="font-display text-base leading-none" data-cd="s">05</div><div class="text-[8px] uppercase tracking-wider text-cream-100/50">s</div></div>
+          <div class="mt-7 inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-5 rounded-xl px-5 py-4 md:px-7 md:py-5 shadow-lg ring-2 ring-rose-500/40" style="background: linear-gradient(135deg, #E8826B 0%, #C9523F 55%, #A53324 100%); animation: preventa-pulse 2.4s ease-in-out infinite;">
+            <span class="font-display font-bold text-[14px] md:text-[16px] tracking-[.04em] uppercase text-cream-100 text-center sm:text-left leading-tight">¡Precio especial<br class="sm:hidden"/> por preventa!<br class="hidden sm:inline"/><span class="block text-[10.5px] md:text-[11.5px] tracking-[.22em] font-medium text-cream-100/85 mt-1">Cierra en</span></span>
+            <div id="workshop-countdown" class="flex items-end gap-2 md:gap-2.5 text-cream-100">
+              <div class="text-center"><div class="font-display text-2xl md:text-3xl font-bold leading-none" data-cd="d">08</div><div class="text-[9px] md:text-[10px] uppercase tracking-wider text-cream-100/75 mt-1">días</div></div>
+              <span class="font-display text-xl md:text-2xl text-cream-100/60 leading-none pb-3 md:pb-4">:</span>
+              <div class="text-center"><div class="font-display text-2xl md:text-3xl font-bold leading-none" data-cd="h">14</div><div class="text-[9px] md:text-[10px] uppercase tracking-wider text-cream-100/75 mt-1">hrs</div></div>
+              <span class="font-display text-xl md:text-2xl text-cream-100/60 leading-none pb-3 md:pb-4">:</span>
+              <div class="text-center"><div class="font-display text-2xl md:text-3xl font-bold leading-none" data-cd="m">32</div><div class="text-[9px] md:text-[10px] uppercase tracking-wider text-cream-100/75 mt-1">min</div></div>
+              <span class="font-display text-xl md:text-2xl text-cream-100/60 leading-none pb-3 md:pb-4">:</span>
+              <div class="text-center"><div class="font-display text-2xl md:text-3xl font-bold leading-none" data-cd="s">05</div><div class="text-[9px] md:text-[10px] uppercase tracking-wider text-cream-100/75 mt-1">seg</div></div>
             </div>
           </div>
 
@@ -2053,9 +2163,20 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
             </div>
             <div class="text-[11px] tracking-[.22em] uppercase text-cream-100/50 mb-1">Viernes 29 · Mayo</div>
             <h3 class="font-display text-2xl font-semibold text-cream-100 mb-3 leading-tight">El origen de la herida.</h3>
-            <p class="text-[14.5px] text-cream-100/75 leading-[1.6]">
-              Identificarás la herida emocional que está dirigiendo tu vida: rechazo, abandono, humillación, traición o injusticia.<br/><br/>Pondrás nombre a esa voz que te dice <em>"no soy suficiente"</em>, <em>"me van a dejar"</em>, <em>"algo está mal conmigo"</em>, <em>"no puedo confiar"</em> o <em>"tengo que ser perfecta"</em>.
-            </p>
+            <div class="text-[14.5px] text-cream-100/75 leading-[1.6] space-y-3">
+              <p>Explorando el origen de tu inseguridad.</p>
+              <div>
+                <p class="text-cream-100/85">¿Qué son las heridas emocionales?</p>
+                <ul class="mt-2 space-y-1 text-[13.5px] text-cream-100/70">
+                  <li>Rechazo → <em>"no soy suficiente"</em></li>
+                  <li>Abandono → <em>"me van a dejar"</em></li>
+                  <li>Humillación → <em>"algo está mal conmigo"</em></li>
+                  <li>Traición → <em>"no puedo confiar"</em></li>
+                  <li>Injusticia → <em>"tengo que ser perfecta"</em></li>
+                </ul>
+              </div>
+              <p class="text-rose-300 italic font-display">No eres insegura, estás herida.</p>
+            </div>
             <div class="mt-4 pt-4 border-t border-cream-100/15 space-y-1.5 text-[12.5px] text-cream-100/80">
               <div class="flex items-start gap-2"><i data-lucide="sparkle" class="w-3.5 h-3.5 mt-0.5 text-rose-300 flex-shrink-0"></i> Dinámica "La historia que nunca conté"</div>
               <div class="flex items-start gap-2"><i data-lucide="sparkle" class="w-3.5 h-3.5 mt-0.5 text-rose-300 flex-shrink-0"></i> Ejercicio de Hipnosis "Un encuentro conmigo"</div>
@@ -2076,9 +2197,24 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
             </div>
             <div class="text-[11px] tracking-[.22em] uppercase text-cream-100/50 mb-1">Viernes 5 · Junio</div>
             <h3 class="font-display text-2xl font-semibold text-cream-100 mb-3 leading-tight">Tu herida en el presente.</h3>
-            <p class="text-[14.5px] text-cream-100/75 leading-[1.6]">
-              Verás cómo tu herida se filtra en tus relaciones, tu autoexigencia, tu comparación, la búsqueda de validación, la culpa, el estancamiento y la procrastinación.<br/><br/>Aprenderás a poner límites sin sentir que estás haciendo algo malo.
-            </p>
+            <div class="text-[14.5px] text-cream-100/75 leading-[1.6] space-y-3">
+              <div>
+                <p class="text-cream-100/85">Así se ve tu herida en la vida actual:</p>
+                <ul class="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-[13px] text-cream-100/70">
+                  <li>Dependencia emocional</li>
+                  <li>Dar de más</li>
+                  <li>Miedo a estar sola</li>
+                  <li>Autoexigencia extrema</li>
+                  <li>Comparación constante</li>
+                  <li>Buscar validación</li>
+                  <li>Dar en exceso para pertenecer</li>
+                  <li>Estancamiento</li>
+                  <li>Procrastinación</li>
+                  <li>Culpa</li>
+                </ul>
+              </div>
+              <p class="text-rose-300 italic font-display">Aprendiendo a poner límites.</p>
+            </div>
             <div class="mt-4 pt-4 border-t border-cream-100/15 space-y-1.5 text-[12.5px] text-cream-100/80">
               <div class="flex items-start gap-2"><i data-lucide="sparkle" class="w-3.5 h-3.5 mt-0.5 text-rose-300 flex-shrink-0"></i> Dinámica "El espejo incómodo"</div>
               <div class="flex items-start gap-2"><i data-lucide="sparkle" class="w-3.5 h-3.5 mt-0.5 text-rose-300 flex-shrink-0"></i> Ejercicio de Hipnosis "Soy suficiente"</div>
@@ -2099,9 +2235,27 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
             </div>
             <div class="text-[11px] tracking-[.22em] uppercase text-cream-100/50 mb-1">Viernes 12 · Junio</div>
             <h3 class="font-display text-2xl font-semibold text-cream-100 mb-3 leading-tight">Tu nueva identidad.</h3>
-            <p class="text-[14.5px] text-cream-100/75 leading-[1.6]">
-              Reconstruirás tu historia de seguridad y confianza.<br/><br/>Conectarás con la mujer que se elige, pone límites, no negocia su valor y no se abandona por amor.<br/><br/>Definirás cómo piensa, cómo actúa y qué ya no permite una mujer segura.
-            </p>
+            <div class="text-[14.5px] text-cream-100/75 leading-[1.6] space-y-3">
+              <p>Tu historia a tu favor: tu primera historia de seguridad y confianza.</p>
+              <div>
+                <p class="text-cream-100/85">Conecta con la mujer que:</p>
+                <ul class="mt-2 space-y-1 text-[13.5px] text-cream-100/70">
+                  <li>Se elige</li>
+                  <li>Pone límites</li>
+                  <li>No negocia su valor</li>
+                  <li>No se abandona por amor</li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-cream-100/85">Tu nueva identidad: <em class="text-rose-300">Segura de ti</em></p>
+                <ul class="mt-2 space-y-1 text-[13.5px] text-cream-100/70">
+                  <li>¿Cómo piensa una mujer segura?</li>
+                  <li>¿Cómo se comporta?</li>
+                  <li>¿Qué ya no permite?</li>
+                </ul>
+              </div>
+              <p class="text-rose-300 italic font-display">Aprendizajes finales.</p>
+            </div>
             <div class="mt-4 pt-4 border-t border-cream-100/15 space-y-1.5 text-[12.5px] text-cream-100/80">
               <div class="flex items-start gap-2"><i data-lucide="sparkle" class="w-3.5 h-3.5 mt-0.5 text-rose-300 flex-shrink-0"></i> Visualización "El campo de todas las posibilidades"</div>
               <div class="flex items-start gap-2"><i data-lucide="sparkle" class="w-3.5 h-3.5 mt-0.5 text-rose-300 flex-shrink-0"></i> Ejercicio de Hipnosis "Mujer Poderosa"</div>
@@ -2224,8 +2378,6 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
 <!-- 4 ▸ WHAT'S INCLUDED                            -->
 <!-- ═══════════════════════════════════════════════ -->
 <section id="incluye" class="relative bg-cream-100 py-16 md:py-32 px-4 md:px-8 overflow-hidden">
-  <!-- Decorative oversized numeral backdrop -->
-  <div aria-hidden="true" class="absolute -top-12 left-1/2 -translate-x-1/2 font-display italic text-[280px] md:text-[420px] leading-none font-semibold text-wine-700/[0.045] select-none pointer-events-none">6</div>
 
   <div class="max-w-6xl mx-auto relative">
     <!-- ─── Section header ─── -->
@@ -2461,11 +2613,11 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
         <div class="mockup-shadow"></div>
       </div>
       <div class="incluye-text order-2 md:order-2">
-        <div class="incluye-chip">Material físico</div>
+        <div class="incluye-chip">MATERIAL DIGITAL</div>
         <h3 class="incluye-title">Preguntas de <em>reflexión</em></h3>
         <p class="incluye-body">Cuaderno de trabajo en PDF con preguntas de reflexión y ejercicios entre sesión y sesión.</p>
         <ul class="incluye-meta">
-          <li><i data-lucide="file-text" class="w-3.5 h-3.5"></i> PDF · 48 páginas</li>
+          <li><i data-lucide="file-text" class="w-3.5 h-3.5"></i> PDF</li>
           <li><i data-lucide="pen-tool" class="w-3.5 h-3.5"></i> Ejercicios dirigidos</li>
           <li><i data-lucide="download" class="w-3.5 h-3.5"></i> Imprimible de por vida</li>
         </ul>
@@ -2633,7 +2785,7 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
               <div class="course-top">
                 <div class="course-title-wrap">
                   <div class="eyebrow-mini">Segura de Ti · Grabaciones</div>
-                  <div class="course-title-main">Sesión 02 · El cuerpo que ocupa espacio</div>
+                  <div class="course-title-main">Sesión 02 · Tu herida en el presente</div>
                 </div>
                 <div class="course-avatars">
                   <span>W</span>
@@ -2694,6 +2846,140 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
       </div>
     </div>
 
+    <!-- ═══ 07 · Videos reflexivos ═══ (mockup LEFT) -->
+    <div class="incluye-row reveal">
+      <div class="incluye-visual order-1 md:order-1">
+        <div class="incluye-index">07</div>
+        <!-- "Lunes" calendar stack of video thumbnails -->
+        <div class="mockup-laptop" style="--laptop-w: 460px;">
+          <div class="laptop-frame">
+            <div class="laptop-toolbar">
+              <span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span>
+              <div class="laptop-title">Segura de Ti · Videos reflexivos</div>
+            </div>
+            <div class="laptop-screen" style="background: linear-gradient(180deg, #FAF3EA 0%, #F4E4D3 100%); padding: 14px 16px;">
+              <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:10px;">
+                <div style="font-family:'Playfair Display', serif; font-size:13px; color:#2A0712; font-weight:600;">Tu reflexión semanal</div>
+                <div style="font-size:8px; letter-spacing:.18em; text-transform:uppercase; color:#7A1F2E;">8 semanas · Lunes</div>
+              </div>
+              <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:8px;">
+                <!-- 4 video cards -->
+                <div style="background:#fff; border:1px solid rgba(122,31,46,.12); border-radius:8px; padding:8px; box-shadow:0 4px 10px -4px rgba(74,15,31,.15);">
+                  <div style="aspect-ratio: 16/9; background: linear-gradient(135deg,#4A0F1F,#7A1F2E); border-radius:5px; position:relative; display:flex; align-items:center; justify-content:center; margin-bottom:6px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#F4E4D3"><path d="M8 5v14l11-7z"/></svg>
+                    <span style="position:absolute; bottom:3px; right:4px; font-size:7px; color:#F4E4D3; background:rgba(0,0,0,.5); padding:1px 4px; border-radius:3px;">06:42</span>
+                  </div>
+                  <div style="font-size:8.5px; font-weight:600; color:#2A0712; line-height:1.25;">Sem 01 · La voz que aprendiste</div>
+                  <div style="font-size:7px; color:#7A1F2E; margin-top:2px; letter-spacing:.1em; text-transform:uppercase;">Lun · 2 jun</div>
+                </div>
+                <div style="background:#fff; border:1px solid rgba(122,31,46,.12); border-radius:8px; padding:8px; box-shadow:0 4px 10px -4px rgba(74,15,31,.15);">
+                  <div style="aspect-ratio: 16/9; background: linear-gradient(135deg,#7A1F2E,#A53324); border-radius:5px; position:relative; display:flex; align-items:center; justify-content:center; margin-bottom:6px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#F4E4D3"><path d="M8 5v14l11-7z"/></svg>
+                    <span style="position:absolute; bottom:3px; right:4px; font-size:7px; color:#F4E4D3; background:rgba(0,0,0,.5); padding:1px 4px; border-radius:3px;">07:18</span>
+                  </div>
+                  <div style="font-size:8.5px; font-weight:600; color:#2A0712; line-height:1.25;">Sem 02 · Mirarte sin filtro</div>
+                  <div style="font-size:7px; color:#7A1F2E; margin-top:2px; letter-spacing:.1em; text-transform:uppercase;">Lun · 9 jun</div>
+                </div>
+                <div style="background:#fff; border:1px solid rgba(122,31,46,.12); border-radius:8px; padding:8px; box-shadow:0 4px 10px -4px rgba(74,15,31,.15);">
+                  <div style="aspect-ratio: 16/9; background: linear-gradient(135deg,#C08B5C,#7A1F2E); border-radius:5px; position:relative; display:flex; align-items:center; justify-content:center; margin-bottom:6px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#F4E4D3"><path d="M8 5v14l11-7z"/></svg>
+                    <span style="position:absolute; bottom:3px; right:4px; font-size:7px; color:#F4E4D3; background:rgba(0,0,0,.5); padding:1px 4px; border-radius:3px;">05:54</span>
+                  </div>
+                  <div style="font-size:8.5px; font-weight:600; color:#2A0712; line-height:1.25;">Sem 03 · Decir que no</div>
+                  <div style="font-size:7px; color:#7A1F2E; margin-top:2px; letter-spacing:.1em; text-transform:uppercase;">Lun · 16 jun</div>
+                </div>
+                <div style="background:rgba(255,255,255,.6); border:1px dashed rgba(122,31,46,.25); border-radius:8px; padding:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; aspect-ratio: auto;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A1F2E" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  <div style="font-size:8.5px; color:#7A1F2E; font-weight:600;">+5 más</div>
+                  <div style="font-size:7px; color:#7A1F2E; opacity:.7;">Cada lunes</div>
+                </div>
+              </div>
+            </div>
+            <div class="laptop-base"></div>
+          </div>
+        </div>
+        <div class="mockup-shadow"></div>
+      </div>
+      <div class="incluye-text order-2 md:order-2">
+        <div class="incluye-chip">CADA LUNES EN TU WHATSAPP</div>
+        <h3 class="incluye-title">8 videos <em>reflexivos</em></h3>
+        <p class="incluye-body">Recíbelos cada lunes para tener otra perspectiva de ti misma y de tu entorno, y actuar de forma más segura durante toda tu semana.</p>
+        <ul class="incluye-meta">
+          <li><i data-lucide="calendar-days" class="w-3.5 h-3.5"></i> Cada lunes · 8 semanas</li>
+          <li><i data-lucide="compass" class="w-3.5 h-3.5"></i> Abordaje práctico</li>
+          <li><i data-lucide="layers" class="w-3.5 h-3.5"></i> Profundiza los temas de las 3 sesiones en vivo</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ═══ 08 · Ejercicios prácticos ═══ (mockup RIGHT) -->
+    <div class="incluye-row reveal">
+      <div class="incluye-text order-2 md:order-1">
+        <div class="incluye-chip">Lleva la teoría a la acción</div>
+        <h3 class="incluye-title">Ejercicios <em>prácticos</em></h3>
+        <p class="incluye-body">Actividades concretas para llevar a la acción el conocimiento aprendido en cada clase en vivo. Pequeñas prácticas para tu día a día.</p>
+        <ul class="incluye-meta">
+          <li><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Aplica en tu vida cotidiana</li>
+          <li><i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Aumenta tu confianza diaria</li>
+          <li><i data-lucide="dumbbell" class="w-3.5 h-3.5"></i> Practica la teoría</li>
+        </ul>
+      </div>
+      <div class="incluye-visual order-1 md:order-2">
+        <div class="incluye-index">08</div>
+        <!-- Notebook with checklist -->
+        <div class="mockup-phone" style="--phone-w: 280px;">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen" style="background: linear-gradient(180deg, #FAF3EA 0%, #F4E4D3 100%); padding: 18px 16px;">
+              <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:14px;">
+                <div>
+                  <div style="font-size:8px; letter-spacing:.22em; text-transform:uppercase; color:#7A1F2E; font-weight:600;">Mi práctica · Hoy</div>
+                  <div style="font-family:'Playfair Display', serif; font-size:16px; color:#2A0712; font-weight:600; margin-top:2px;">Día 03 de 21</div>
+                </div>
+                <div style="width:32px; height:32px; border-radius:50%; background: conic-gradient(#C9523F 0deg 51deg, rgba(122,31,46,.12) 51deg 360deg); display:flex; align-items:center; justify-content:center;">
+                  <div style="width:24px; height:24px; border-radius:50%; background:#FAF3EA; display:flex; align-items:center; justify-content:center; font-size:8px; font-weight:700; color:#2A0712;">14%</div>
+                </div>
+              </div>
+              <!-- Tasks -->
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="display:flex; align-items:flex-start; gap:9px; padding:10px 11px; background:#fff; border-radius:9px; border:1px solid rgba(122,31,46,.1); box-shadow:0 2px 6px -2px rgba(74,15,31,.1);">
+                  <div style="width:16px; height:16px; border-radius:5px; background:#C9523F; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>
+                  </div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:9.5px; font-weight:600; color:#2A0712; line-height:1.3; text-decoration:line-through; opacity:.55;">Anota una situación donde te abandonaste</div>
+                    <div style="font-size:7.5px; color:#7A1F2E; margin-top:2px; letter-spacing:.05em;">5 min · escritura</div>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:flex-start; gap:9px; padding:10px 11px; background:#fff; border-radius:9px; border:1.5px solid #C9523F; box-shadow:0 4px 12px -2px rgba(201,82,63,.25);">
+                  <div style="width:16px; height:16px; border-radius:5px; border:2px solid #C9523F; flex-shrink:0; margin-top:1px;"></div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:9.5px; font-weight:600; color:#2A0712; line-height:1.3;">Practica un "no" hoy sin justificar</div>
+                    <div style="font-size:7.5px; color:#C9523F; margin-top:2px; letter-spacing:.05em; font-weight:600;">En curso · 3 min</div>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:flex-start; gap:9px; padding:10px 11px; background:rgba(255,255,255,.7); border-radius:9px; border:1px solid rgba(122,31,46,.1);">
+                  <div style="width:16px; height:16px; border-radius:5px; border:2px solid rgba(122,31,46,.3); flex-shrink:0; margin-top:1px;"></div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:9.5px; font-weight:600; color:#2A0712; line-height:1.3;">Audio de hipnosis "Soy suficiente"</div>
+                    <div style="font-size:7.5px; color:#7A1F2E; margin-top:2px; letter-spacing:.05em;">15 min · antes de dormir</div>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:flex-start; gap:9px; padding:10px 11px; background:rgba(255,255,255,.7); border-radius:9px; border:1px solid rgba(122,31,46,.1);">
+                  <div style="width:16px; height:16px; border-radius:5px; border:2px solid rgba(122,31,46,.3); flex-shrink:0; margin-top:1px;"></div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:9.5px; font-weight:600; color:#2A0712; line-height:1.3;">Bitácora · ¿qué sentiste hoy?</div>
+                    <div style="font-size:7.5px; color:#7A1F2E; margin-top:2px; letter-spacing:.05em;">2 min · reflexión</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-shadow"></div>
+      </div>
+    </div>
+
     <!-- ═══════════════════════════════════════════════ -->
     <!-- STACK SUMMARY — "El montón" de materiales      -->
     <!-- ═══════════════════════════════════════════════ -->
@@ -2703,7 +2989,7 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
         <h3 class="font-display text-3xl md:text-5xl font-semibold mt-4 leading-[1.1] text-wine-950">
           Todo esto <em class="italic text-rose-500">llega a tus manos</em>.
         </h3>
-        <p class="mt-5 text-[15px] text-ink-500 leading-relaxed">Seis piezas, un solo pago. Así se ve el inventario que recibes al inscribirte.</p>
+        <p class="mt-5 text-[15px] text-ink-500 leading-relaxed">Ocho piezas, un solo pago. Así se ve el inventario que recibes al inscribirte.</p>
       </div>
 
       <!-- MOBILE: simple grid replacement for cramped stack -->
@@ -2737,6 +3023,16 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
           <div class="text-[28px] mb-1">📹</div>
           <div class="font-display text-wine-950 text-sm font-semibold leading-tight">Grabaciones</div>
           <div class="text-[10px] uppercase tracking-wider text-wine-700/60 mt-1">2 meses acceso</div>
+        </div>
+        <div class="bg-cream-100/95 backdrop-blur rounded-xl border border-wine-700/15 p-4 text-center">
+          <div class="text-[28px] mb-1">🎥</div>
+          <div class="font-display text-wine-950 text-sm font-semibold leading-tight">8 videos reflexivos</div>
+          <div class="text-[10px] uppercase tracking-wider text-wine-700/60 mt-1">Cada lunes</div>
+        </div>
+        <div class="bg-cream-100/95 backdrop-blur rounded-xl border border-wine-700/15 p-4 text-center">
+          <div class="text-[28px] mb-1">✨</div>
+          <div class="font-display text-wine-950 text-sm font-semibold leading-tight">Ejercicios prácticos</div>
+          <div class="text-[10px] uppercase tracking-wider text-wine-700/60 mt-1">Para tu día a día</div>
         </div>
       </div>
 
@@ -2831,6 +3127,26 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
           <div class="stack-label">02 · Hipnosis</div>
         </div>
 
+        <!-- 07 · Videos reflexivos -->
+        <div class="stack-item stack-videos">
+          <div class="stack-mockup-videos">
+            <div class="stack-videos-thumb"></div>
+            <div class="stack-videos-meta"><span>LUN</span><b>SEM 01</b></div>
+          </div>
+          <div class="stack-label">07 · Videos</div>
+        </div>
+
+        <!-- 08 · Ejercicios prácticos -->
+        <div class="stack-item stack-tasks">
+          <div class="stack-mockup-tasks">
+            <div class="stack-tasks-row done"><span class="tk-box"></span><span class="tk-line"></span></div>
+            <div class="stack-tasks-row active"><span class="tk-box"></span><span class="tk-line"></span></div>
+            <div class="stack-tasks-row"><span class="tk-box"></span><span class="tk-line"></span></div>
+            <div class="stack-tasks-row"><span class="tk-box"></span><span class="tk-line"></span></div>
+          </div>
+          <div class="stack-label">08 · Ejercicios</div>
+        </div>
+
         <!-- Floating rosegold sparkles -->
         <svg class="stack-sparkle sparkle-1" viewBox="0 0 20 20"><path d="M10 0 L11 9 L20 10 L11 11 L10 20 L9 11 L0 10 L9 9 Z" fill="#E2BE96"/></svg>
         <svg class="stack-sparkle sparkle-2" viewBox="0 0 20 20"><path d="M10 0 L11 9 L20 10 L11 11 L10 20 L9 11 L0 10 L9 9 Z" fill="#C08B5C"/></svg>
@@ -2841,11 +3157,11 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
       <div class="mt-14 max-w-2xl mx-auto bg-white/70 backdrop-blur border border-wine-700/15 rounded-2xl p-6 md:p-7 text-center shadow-[0_22px_50px_-18px_rgba(74,15,31,0.18)]">
         <div class="text-[11px] tracking-[.28em] uppercase text-wine-700/70 font-medium">Valor real del paquete</div>
         <div class="mt-2 flex items-baseline justify-center gap-3 flex-wrap">
-          <span class="font-display text-ink-300 line-through text-2xl md:text-3xl">USD $480</span>
+          <span class="font-display text-ink-300 line-through text-2xl md:text-3xl">USD $138</span>
           <span class="font-display italic text-rose-500 text-3xl md:text-4xl">→</span>
           <span class="font-display text-wine-950 font-bold text-4xl md:text-5xl">USD $69</span>
         </div>
-        <p class="mt-3 text-[13.5px] text-ink-500 leading-relaxed">Sin letra chica. Acceso completo a las seis piezas, desde el primer día.</p>
+        <p class="mt-3 text-[13.5px] text-ink-500 leading-relaxed">Sin letra chica. Acceso completo a las ocho piezas, desde el primer día.</p>
         <a href="#checkout" class="rosegold-btn inline-flex mt-6 font-medium text-[13px] tracking-[.15em] uppercase px-8 py-4 rounded-lg items-center gap-3">
           Inscribirme al workshop
           <i data-lucide="arrow-right" class="w-4 h-4"></i>
@@ -2868,7 +3184,7 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
       <div class="eyebrow text-wine-700">Quién te acompaña</div>
       <h2 class="font-display text-4xl md:text-6xl lg:text-7xl font-semibold mt-4 leading-[.98] text-wine-950">
         Wendy Requenes.
-        <span class="block script text-rose-500 text-5xl md:text-7xl lg:text-[88px] mt-2 font-normal">tu mentora.</span>
+        <span class="block script text-rose-500 text-5xl md:text-7xl lg:text-[88px] mt-2 font-normal">Tu mentora.</span>
       </h2>
     </div>
 
@@ -3243,51 +3559,26 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
 
   <div class="max-w-6xl mx-auto relative text-cream-100">
     <div class="reveal text-center max-w-3xl mx-auto mb-14">
-      <div class="eyebrow centered text-rose-300">Stack de bonos</div>
-      <h2 class="font-display text-4xl md:text-6xl font-semibold mt-4 leading-[1.05]">
-        Si te inscribes antes del <em class="italic rosegold-text">30 de abril</em>,<br/>
-        también recibes.
-      </h2>
+      <div class="eyebrow centered text-rose-300">BONOS EXTRA</div>
+      <h2 class="font-display text-4xl md:text-6xl font-semibold mt-4 leading-[1.05]">Si te inscribes antes del
+30 de abril,
+también recibes.</h2>
       <p class="mt-6 text-cream-100/70 text-[16px] leading-[1.7]">
-        Cuatro regalos adicionales con valor real de <b class="text-rose-300">$312 USD</b>, pensados para sostener la transformación más allá del workshop.
+        Dos regalos adicionales con valor real de <b class="text-rose-300">$103 USD</b>, pensados para sostener la transformación más allá del workshop.
       </p>
     </div>
 
     <!-- Bonus cards -->
     <div class="grid md:grid-cols-2 gap-5">
-      <div class="reveal delay-1 bezel">
-        <div class="bezel-inner !bg-wine-950/60 p-7 relative overflow-hidden">
-          <div class="absolute -top-4 -right-4 opacity-10"><i data-lucide="gift" class="w-28 h-28 text-rose-300"></i></div>
-          <div class="flex items-start justify-between mb-4">
-            <span class="text-[10px] tracking-[.22em] uppercase text-rose-300">Bono #01</span>
-            <span class="text-[12px] rosegold-text font-medium">Valor $89</span>
-          </div>
-          <h3 class="font-display text-2xl md:text-3xl font-semibold">Masterclass "Límites sin culpa"</h3>
-          <p class="mt-3 text-[14.5px] text-cream-100/70 leading-relaxed">Clase grabada de 75 min con casos reales y guiones conversacionales para decir no sin desgastar relaciones.</p>
-          <div class="mt-5 text-[12px] text-rose-300 flex items-center gap-2"><i data-lucide="lock-open" class="w-3.5 h-3.5"></i> Se desbloquea al inscribirte</div>
-        </div>
-      </div>
       <div class="reveal delay-2 bezel">
         <div class="bezel-inner !bg-wine-950/60 p-7 relative overflow-hidden">
           <div class="absolute -top-4 -right-4 opacity-10"><i data-lucide="notebook-pen" class="w-28 h-28 text-rose-300"></i></div>
           <div class="flex items-start justify-between mb-4">
-            <span class="text-[10px] tracking-[.22em] uppercase text-rose-300">Bono #02</span>
+            <span class="text-[10px] tracking-[.22em] uppercase text-rose-300">BONO #01</span>
             <span class="text-[12px] rosegold-text font-medium">Valor $49</span>
           </div>
-          <h3 class="font-display text-2xl md:text-3xl font-semibold">Diario "21 días de reclamo"</h3>
-          <p class="mt-3 text-[14.5px] text-cream-100/70 leading-relaxed">Journal terapéutico impreso (PDF imprimible) con un micro-ejercicio diario para reconstruir tu voz interior.</p>
-          <div class="mt-5 text-[12px] text-rose-300 flex items-center gap-2"><i data-lucide="lock-open" class="w-3.5 h-3.5"></i> Se desbloquea al inscribirte</div>
-        </div>
-      </div>
-      <div class="reveal delay-3 bezel">
-        <div class="bezel-inner !bg-wine-950/60 p-7 relative overflow-hidden">
-          <div class="absolute -top-4 -right-4 opacity-10"><i data-lucide="phone-call" class="w-28 h-28 text-rose-300"></i></div>
-          <div class="flex items-start justify-between mb-4">
-            <span class="text-[10px] tracking-[.22em] uppercase text-rose-300">Bono #03</span>
-            <span class="text-[12px] rosegold-text font-medium">Valor $120</span>
-          </div>
-          <h3 class="font-display text-2xl md:text-3xl font-semibold">Sesión grupal de seguimiento</h3>
-          <p class="mt-3 text-[14.5px] text-cream-100/70 leading-relaxed">Q&amp;A en vivo con Wendy 30 días después, para resolver lo que salió en la integración.</p>
+          <h3 class="font-display text-2xl md:text-3xl font-semibold">Diario "21 días de voz interior"</h3>
+          <p class="mt-3 text-[14.5px] text-cream-100/70 leading-relaxed">Journal terapéutico (PDF imprimible) con un micro-ejercicio diario para reconstruir tu voz interior.</p>
           <div class="mt-5 text-[12px] text-rose-300 flex items-center gap-2"><i data-lucide="lock-open" class="w-3.5 h-3.5"></i> Se desbloquea al inscribirte</div>
         </div>
       </div>
@@ -3295,7 +3586,7 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
         <div class="bezel-inner !bg-wine-950/60 p-7 relative overflow-hidden">
           <div class="absolute -top-4 -right-4 opacity-10"><i data-lucide="music-2" class="w-28 h-28 text-rose-300"></i></div>
           <div class="flex items-start justify-between mb-4">
-            <span class="text-[10px] tracking-[.22em] uppercase text-rose-300">Bono #04</span>
+            <span class="text-[10px] tracking-[.22em] uppercase text-rose-300">BONO #02</span>
             <span class="text-[12px] rosegold-text font-medium">Valor $54</span>
           </div>
           <h3 class="font-display text-2xl md:text-3xl font-semibold">Playlist de anclaje sonoro</h3>
@@ -3309,9 +3600,9 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
     <div class="reveal mt-10 max-w-2xl mx-auto bezel">
       <div class="bezel-inner !bg-wine-950 p-6 md:p-8 flex flex-wrap items-center justify-between gap-5">
         <div>
-          <div class="text-[11px] tracking-[.22em] uppercase text-rose-300">Valor total del paquete</div>
-          <div class="font-display text-4xl font-bold mt-1"><span class="line-through text-cream-100/35 mr-3 text-2xl">$401</span><span class="rosegold-text">$69</span> <span class="text-cream-100/60 text-base font-normal">USD</span></div>
-          <div class="text-[13px] text-cream-100/60 mt-1">Workshop + 4 bonos · tarifa preventa</div>
+          <div class="text-[11px] tracking-[.22em] uppercase text-rose-300">VALOR TOTAL DEL PAQUETE + 2 BONOS</div>
+          <div class="font-display text-4xl font-bold mt-1"><span class="line-through text-cream-100/35 mr-3 text-2xl">$241</span><span class="rosegold-text">$69</span> <span class="text-cream-100/60 text-base font-normal">USD</span></div>
+          <div class="text-[13px] text-cream-100/60 mt-1">Workshop + 2 bonos · tarifa preventa</div>
         </div>
         <a href="#checkout" class="rosegold-btn font-medium text-[13px] tracking-[.15em] uppercase px-7 py-4 rounded-lg inline-flex items-center gap-3 flex-shrink-0">
           Reclamar mi paquete
@@ -3328,12 +3619,12 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
 <section class="bg-cream-100 py-16 md:py-32 px-4 md:px-8">
   <div class="max-w-6xl mx-auto">
     <div class="reveal text-center max-w-3xl mx-auto mb-14">
-      <div class="eyebrow centered text-wine-700">Barreras honestas</div>
+      <div class="eyebrow centered text-wine-700">¿LO SIGUES PENSANDO?</div>
       <h2 class="font-display text-4xl md:text-6xl font-semibold mt-4 leading-[1.05] text-wine-950">
-        "Sí, pero <em class="italic text-rose-500">¿y si…?</em>"
+        "Sí, pero <em class="italic text-rose-500"></em>"
       </h2>
       <p class="mt-6 text-ink-500 text-[16px] leading-[1.7]">
-        La voz que te retiene tiene argumentos ensayados. Vamos a escucharla y a responderle.
+        La voz que te retiene tiene argumentos aprendidos. Vamos a escucharla y a responderle.
       </p>
     </div>
 
@@ -3343,28 +3634,28 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-wine-700/8 flex items-center justify-center"><i data-lucide="clock" class="w-5 h-5 text-wine-700"></i></div>
         <div>
           <h3 class="font-display text-xl font-semibold text-wine-950 mb-1">"No tengo tiempo."</h3>
-          <p class="text-[14.5px] text-ink-500 leading-relaxed">Son tres noches, un viernes a la semana. Menos tiempo que el que ya inviertes repasando conversaciones en tu cabeza a las 2 am. Además, si te pierdes una, la grabación te espera 60 días.</p>
+          <p class="text-[14.5px] text-ink-500 leading-relaxed">Son tres noches, un viernes a la semana. Menos tiempo que el que ya inviertes en estar tan disponible para los demás. Recuerda que si te pierdes una clase, la grabación te espera 60 días.</p>
         </div>
       </div>
       <div class="reveal delay-2 bg-white/80 rounded-2xl p-7 border border-wine-700/10 flex gap-5">
         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-wine-700/8 flex items-center justify-center"><i data-lucide="dollar-sign" class="w-5 h-5 text-wine-700"></i></div>
         <div>
-          <h3 class="font-display text-xl font-semibold text-wine-950 mb-1">"No es el mejor momento económicamente."</h3>
-          <p class="text-[14.5px] text-ink-500 leading-relaxed">Lo que gastas en un fin de semana para desconectarte puede ser lo mismo que te cuesta empezar a cambiar lo que te pesa todos los días.</p>
+          <h3 class="font-display text-xl font-semibold text-wine-950 mb-1">"No tengo dinero."</h3>
+          <p class="text-[14.5px] text-ink-500 leading-relaxed">Lo que gastas en un fin de semana para intentar desconectarte de aquello que te hace sentir insuficiente, puede ser lo mismo que te cuesta empezar a cambiar lo que te pesa todos los días.</p>
         </div>
       </div>
       <div class="reveal delay-3 bg-white/80 rounded-2xl p-7 border border-wine-700/10 flex gap-5">
         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-wine-700/8 flex items-center justify-center"><i data-lucide="book-x" class="w-5 h-5 text-wine-700"></i></div>
         <div>
           <h3 class="font-display text-xl font-semibold text-wine-950 mb-1">"Ya intenté miles de cosas."</h3>
-          <p class="text-[14.5px] text-ink-500 leading-relaxed">Y por eso este workshop no es contenido suelto: es intervención clínica. La hipnosis clínica va a lo profundo, donde la fuerza de voluntad muchas veces ya no alcanza.</p>
+          <p class="text-[14.5px] text-ink-500 leading-relaxed">Y por eso este workshop no es contenido suelto: es intervención profunda. La hipnosis clínica trabaja con tus miedos, inseguridades y heridas, donde la fuerza de voluntad muchas veces ya no alcanza.</p>
         </div>
       </div>
       <div class="reveal delay-4 bg-white/80 rounded-2xl p-7 border border-wine-700/10 flex gap-5">
         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-wine-700/8 flex items-center justify-center"><i data-lucide="user-x" class="w-5 h-5 text-wine-700"></i></div>
         <div>
           <h3 class="font-display text-xl font-semibold text-wine-950 mb-1">"Me da pena estar en grupo."</h3>
-          <p class="text-[14.5px] text-ink-500 leading-relaxed">La intimidad del grupo es una invitación, nunca una exigencia. Wendy se encarga de crear un espacio seguro de conexión profunda donde todas aprenden y comparten sin miedo.</p>
+          <p class="text-[14.5px] text-ink-500 leading-relaxed">La intimidad del grupo es una invitación, nunca una exigencia. Wendy se encarga de crear un espacio seguro de conexión profunda donde todas aprenden y comparten sin miedo ni juicios.</p>
         </div>
       </div>
       <div class="reveal delay-1 bg-white/80 rounded-2xl p-7 border border-wine-700/10 flex gap-5">
@@ -3377,20 +3668,8 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
       <div class="reveal delay-2 bg-white/80 rounded-2xl p-7 border border-wine-700/10 flex gap-5">
         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-wine-700/8 flex items-center justify-center"><i data-lucide="heart-crack" class="w-5 h-5 text-wine-700"></i></div>
         <div>
-          <h3 class="font-display text-xl font-semibold text-wine-950 mb-1">"Me asusta remover lo que ya tengo dormido."</h3>
-          <p class="text-[14.5px] text-ink-500 leading-relaxed">Lo dormido sigue manejando tu vida desde abajo. Aquí lo tocamos en un entorno contenido, con una terapeuta profesional al frente y un grupo de mujeres en el mismo proceso.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Guarantee block -->
-    <div class="reveal mt-14 max-w-3xl mx-auto bezel">
-      <div class="bezel-inner p-7 md:p-9 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-        <div class="flex-shrink-0 w-20 h-20 rounded-full bezel"><div class="bezel-inner w-full h-full flex items-center justify-center"><i data-lucide="shield-check" class="w-9 h-9 text-wine-700"></i></div></div>
-        <div>
-          <div class="eyebrow text-rose-500">Garantía honesta</div>
-          <h3 class="font-display text-2xl md:text-3xl font-semibold text-wine-950 mt-2">Si asistes a las 3 sesiones y vives el acompañamiento de 2 meses, pero sientes que no te ayudó, te devolvemos el 100%.</h3>
-          <p class="mt-2 text-[14.5px] text-ink-500">Sin formularios, sin "demuéstrame por qué". Escribes un email y listo. No queremos tu dinero si no es tu momento.</p>
+          <h3 class="font-display text-xl font-semibold text-wine-950 mb-1">"Me asusta remover lo que creo que tengo controlado."</h3>
+          <p class="text-[14.5px] text-ink-500 leading-relaxed">Lo que crees tener controlado sigue manejando tu vida. Aquí lo afrontamos en un entorno contenido, con una terapeuta profesional al frente y un grupo de mujeres en el mismo proceso.</p>
         </div>
       </div>
     </div>
@@ -3415,7 +3694,7 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
     <div class="reveal text-center max-w-3xl mx-auto mb-10 md:mb-16">
       <div class="eyebrow centered text-wine-700">Inversión real</div>
       <h2 class="font-display text-[32px] sm:text-4xl md:text-6xl font-semibold mt-3 md:mt-4 leading-[1.05] text-wine-950">
-        ¿Cuánto te cuesta <em class="italic text-rose-500">no resolver esto</em>?
+        ¿Cuánto te cuesta <em class="italic text-rose-500">sentirte insegura</em>?
       </h2>
       <p class="mt-5 md:mt-6 text-ink-500 text-[14.5px] md:text-[16px] leading-[1.65] md:leading-[1.7]">
         Lo que gastas en un fin de semana distrayéndote de esa voz vs. la inversión que empieza a desactivarla desde la raíz.
@@ -3498,7 +3777,7 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
 
         <div class="comp-total">
           <span class="text-[12px] tracking-[.2em] uppercase font-semibold text-cream-100/85">Tarifa preventa</span>
-          <span class="comp-total-amount"><span class="comp-strike">$89</span>$69 <span class="text-[12px] tracking-[.18em] uppercase opacity-60">USD</span></span>
+          <span class="comp-total-amount"><span class="comp-strike">$138</span>$69 <span class="text-[12px] tracking-[.18em] uppercase opacity-60">USD</span></span>
         </div>
 
         <p class="mt-4 text-[12.5px] text-cream-100/65 italic leading-relaxed">
@@ -3513,7 +3792,7 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
       <div class="bezel">
         <div class="bezel-inner px-6 py-7 md:px-9 md:py-9">
           <p class="font-display text-[19px] md:text-[26px] leading-[1.3] md:leading-[1.25] text-wine-950">
-            Por menos de <em class="italic text-rose-500">un tercio</em> de lo que ya gastas desconectándote, empiezas a trabajar la raíz de por qué necesitas desconectarte.
+            Por menos de <em class="italic text-rose-500">un tercio</em> de lo que ya gastas intentando resolver tus inseguridades, empiezas a trabajar la raíz de esas mismas inseguridades.
           </p>
         </div>
       </div>
@@ -3521,10 +3800,7 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
 
     <!-- CTA -->
     <div class="reveal text-center mt-8 md:mt-10">
-      <a href="#checkout" class="rosegold-btn inline-flex font-medium text-[12.5px] md:text-[13px] tracking-[.15em] uppercase px-7 md:px-8 py-3.5 md:py-4 rounded-lg items-center gap-3">
-        Invertir en mí esta vez
-        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-      </a>
+      <a href="#checkout" class="rosegold-btn inline-flex font-medium text-[12.5px] md:text-[13px] tracking-[.15em] uppercase px-7 md:px-8 py-3.5 md:py-4 rounded-lg items-center gap-3">ESTOY LISTA PARA INVERTIR EN MÍ</a>
       <div class="mt-3 text-[11px] tracking-[.18em] uppercase text-ink-300">Tarifa preventa · cierra 22 may</div>
     </div>
   </div>
@@ -3559,24 +3835,17 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
       </details>
       <details class="group bg-white/70 border border-wine-700/10 rounded-xl p-5 md:p-6 transition hover:border-rose-500/40">
         <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
-          <span class="font-display text-lg md:text-xl font-semibold text-wine-950">¿Hay política de reembolso?</span>
-          <i data-lucide="chevron-down" class="w-5 h-5 text-rose-500 faq-chevron flex-shrink-0"></i>
-        </summary>
-        <p class="mt-4 text-[14.5px] text-ink-500 leading-relaxed">Sí. Si asistes a la primera sesión y sientes que no es para ti, te devolvemos el 100% sin preguntas. También puedes reagendarte a la siguiente cohorte si algo imprevisto pasa.</p>
-      </details>
-      <details class="group bg-white/70 border border-wine-700/10 rounded-xl p-5 md:p-6 transition hover:border-rose-500/40">
-        <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
           <span class="font-display text-lg md:text-xl font-semibold text-wine-950">¿Qué pasa si no puedo asistir a una sesión en vivo?</span>
           <i data-lucide="chevron-down" class="w-5 h-5 text-rose-500 faq-chevron flex-shrink-0"></i>
         </summary>
-        <p class="mt-4 text-[14.5px] text-ink-500 leading-relaxed">Cada sesión queda grabada y disponible en tu portal por 60 días. Puedes verla al día siguiente y mantenerte al ritmo de la cohorte.</p>
+        <p class="mt-4 text-[14.5px] text-ink-500 leading-relaxed">Cada sesión queda grabada y disponible en tu portal por 60 días. Estará disponible al día siguiente de la sesión para que la veas cuando puedas, o incluso volverla a ver las veces que quieras.</p>
       </details>
       <details class="group bg-white/70 border border-wine-700/10 rounded-xl p-5 md:p-6 transition hover:border-rose-500/40">
         <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
           <span class="font-display text-lg md:text-xl font-semibold text-wine-950">¿La hipnosis clínica es segura?</span>
           <i data-lucide="chevron-down" class="w-5 h-5 text-rose-500 faq-chevron flex-shrink-0"></i>
         </summary>
-        <p class="mt-4 text-[14.5px] text-ink-500 leading-relaxed">Sí. Es una técnica avalada por la APA y usada en contextos clínicos. Wendy tiene certificación formal y más de una década aplicándola. Siempre eres tú quien dirige el proceso, nunca se pierde el control.</p>
+        <p class="mt-4 text-[14.5px] text-ink-500 leading-relaxed">Sí. Es una técnica avalada por la APA (Asociación Americana de Psicología) y usada en contextos clínicos. Wendy tiene certificación formal y más de una década aplicándola. Siempre eres tú quien dirige el proceso, nunca se pierde el control.</p>
       </details>
       <details class="group bg-white/70 border border-wine-700/10 rounded-xl p-5 md:p-6 transition hover:border-rose-500/40">
         <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
@@ -3608,9 +3877,9 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
     <div class="reveal text-center max-w-2xl mx-auto mb-12 text-cream-100">
       <div class="eyebrow centered text-rose-300">Reserva tu lugar</div>
       <h2 class="font-display text-4xl md:text-6xl font-semibold mt-4 leading-[1.05]">
-        Un clic te separa de la <em class="italic rosegold-text">nueva versión</em>.
+        Un clic te separa de la versión <em class="italic rosegold-text">Segura de ti</em>.
       </h2>
-      <p class="mt-5 text-cream-100/70 text-[15.5px] leading-relaxed">Inscripción segura. Confirmación inmediata. Acceso al portal privado en menos de 5 minutos.</p>
+      <p class="mt-5 text-cream-100/70 text-[15.5px] leading-relaxed">Confirmación inmediata. Acceso al portal privado en menos de 24 horas.</p>
     </div>
 
     <div class="reveal bezel max-w-5xl mx-auto">
@@ -3620,10 +3889,10 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
           <div class="text-[11px] tracking-[.22em] uppercase text-rose-300 mb-5">Tu inscripción</div>
 
           <div class="flex items-start gap-4 pb-5 border-b border-cream-100/10">
-            <div class="w-14 h-14 rounded-lg bezel flex-shrink-0"><div class="bezel-inner w-full h-full flex items-center justify-center"><span class="font-display font-bold text-wine-700">SdT</span></div></div>
+            <div class="w-14 h-14 rounded-lg bezel flex-shrink-0"><div class="bezel-inner w-full h-full flex flex-col items-center justify-center leading-none"><span class="font-display font-bold text-wine-700 text-[13px]">Segura</span><span class="script text-rose-500 text-[14px] -mt-0.5">de ti</span></div></div>
             <div>
               <div class="font-display text-lg font-semibold">Workshop Segura de Ti</div>
-              <div class="text-[12px] text-cream-100/60 mt-0.5">Cohorte mayo · 3 sesiones en vivo</div>
+              <div class="text-[12px] text-cream-100/60 mt-0.5">Edición mayo · 3 sesiones online en vivo</div>
             </div>
           </div>
 
@@ -3631,14 +3900,17 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
             <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-rose-300 flex-shrink-0"></i> 3 sesiones en vivo por Zoom</li>
             <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-rose-300 flex-shrink-0"></i> Workbook Segura de Ti (PDF)</li>
             <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-rose-300 flex-shrink-0"></i> 3 audios de hipnosis descargables</li>
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-rose-300 flex-shrink-0"></i> Audio guiado de meditación</li>
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-rose-300 flex-shrink-0"></i> 8 videos reflexivos (uno cada lunes)</li>
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-rose-300 flex-shrink-0"></i> Ejercicios prácticos para tu día a día</li>
             <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-rose-300 flex-shrink-0"></i> Grabaciones disponibles por 2 meses.</li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-rose-300 flex-shrink-0"></i> Comunidad privada WhatsApp</li>
-            <li class="flex items-start gap-2"><i data-lucide="gift" class="w-4 h-4 mt-0.5 text-rose-300 flex-shrink-0"></i> <span><b>4 bonos</b> con valor $312</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 mt-0.5 text-rose-300 flex-shrink-0"></i> Comunidad exclusiva WhatsApp</li>
+            <li class="flex items-start gap-2"><i data-lucide="gift" class="w-4 h-4 mt-0.5 text-rose-300 flex-shrink-0"></i> <span>2 bonos con valor $103</span></li>
           </ul>
 
           <div class="mt-7 pt-5 border-t border-cream-100/10 space-y-1.5 text-[13.5px]">
-            <div class="flex justify-between text-cream-100/60"><span>Precio regular</span><span class="line-through">$<span id="ck-was">89</span>.00 USD</span></div>
-            <div class="flex justify-between text-cream-100/60"><span>Descuento preventa</span><span class="text-rose-300">− $20.00 USD</span></div>
+            <div class="flex justify-between text-cream-100/60"><span>Precio regular</span><span class="line-through">$<span id="ck-was">138</span>.00 USD</span></div>
+            <div class="flex justify-between text-cream-100/60"><span>Descuento preventa</span><span class="text-rose-300">− 50% de descuento</span></div>
             <div class="flex justify-between text-cream-100/60"><span>Bonos</span><span class="text-rose-300">Incluidos</span></div>
           </div>
           <div class="mt-5 pt-5 border-t border-cream-100/10 flex items-end justify-between">
@@ -3745,20 +4017,13 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
             </button>
 
             <p class="text-[11.5px] text-ink-300 text-center leading-relaxed">
-              Al continuar aceptas los <a href="#" class="underline text-wine-700">Términos</a> y nuestra <a href="#" class="underline text-wine-700">Política de Privacidad</a>. Garantía de reembolso 100% tras la primera sesión.
+              Al continuar aceptas los <a href="#" class="underline text-wine-700">Términos</a> y nuestra <a href="#" class="underline text-wine-700">Política de Privacidad</a>.
             </p>
           </form>
         </div>
       </div>
     </div>
 
-    <!-- Post-checkout trust -->
-    <div class="reveal mt-10 flex flex-wrap items-center justify-center gap-6 md:gap-10 text-cream-100/60 text-[12px]">
-      <span class="flex items-center gap-2"><i data-lucide="lock" class="w-3.5 h-3.5"></i> Encriptación SSL 256-bit</span>
-      <span class="flex items-center gap-2"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Garantía 100% primera sesión</span>
-      <span class="flex items-center gap-2"><i data-lucide="badge-check" class="w-3.5 h-3.5"></i> Psicóloga certificada</span>
-      <span class="flex items-center gap-2"><i data-lucide="heart" class="w-3.5 h-3.5"></i> Acompañamiento personalizado y grupo de apoyo durante 2 meses.</span>
-    </div>
   </div>
 </section>
 
@@ -3768,14 +4033,14 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
 <footer class="bg-wine-950 text-cream-100/60 py-10 px-4 md:px-8 border-t border-cream-100/5">
   <div class="max-w-6xl mx-auto grid md:grid-cols-[1.3fr_1fr_1fr] gap-8">
     <div>
-      <div class="font-display text-xl font-semibold text-cream-100">Segura <span class="script text-rose-500 text-2xl">de ti</span></div>
-      <div class="text-[11px] tracking-[.22em] uppercase text-cream-100/40 mt-1">Un programa del Instituto SanaMente</div>
-      <p class="mt-4 text-[13px] leading-relaxed max-w-sm">Trabajo clínico serio, envuelto en un formato accesible. Porque la seguridad en una misma no es un lujo — es tu derecho.</p>
+      <img src="assets/logo-segura-de-ti.png" alt="Segura de Ti" class="h-16 md:h-20 w-auto" style="filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));" />
+      <div class="text-[11px] tracking-[.22em] uppercase text-cream-100/40 mt-3">Un programa del Instituto de Desarrollo Personal SanaMente</div>
+      <p class="mt-4 text-[13px] leading-relaxed max-w-sm">Deja de pedir permiso para ser tú, a través del workshop facilitado por Wendy Requenes. Con acompañamiento real durante 2 meses.</p>
     </div>
     <div>
       <div class="text-[11px] tracking-[.22em] uppercase text-cream-100/80">Contacto</div>
       <ul class="mt-3 space-y-1.5 text-[13px]">
-        <li>hola@sanamente.com</li>
+        <li>macy@institutosanamente.com</li>
         <li>WhatsApp +52 55 2345 6789</li>
         <li>Ciudad de México · MX</li>
       </ul>
@@ -3785,12 +4050,11 @@ También me ha ayudado a entender mi dependencia emocional, he roto patrones, he
       <ul class="mt-3 space-y-1.5 text-[13px]">
         <li><a href="#" class="hover:text-rose-300">Términos y condiciones</a></li>
         <li><a href="#" class="hover:text-rose-300">Política de privacidad</a></li>
-        <li><a href="#" class="hover:text-rose-300">Política de reembolso</a></li>
       </ul>
     </div>
   </div>
   <div class="max-w-6xl mx-auto mt-8 pt-5 border-t border-cream-100/10 text-[11px] flex flex-wrap items-center justify-between gap-3">
-    <span>© 2026 Instituto SanaMente. Todos los derechos reservados.</span>
+    <span>© 2026 Instituto de Desarrollo Personal SanaMente. Todos los derechos reservados.</span>
     <span class="script text-rose-500/80 text-base">Hecho con intención.</span>
   </div>
 </footer>
@@ -4053,7 +4317,239 @@ try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(_)
 
 /* Re-render lucide after any DOM changes */
 setTimeout(()=> lucide.createIcons(), 50);
+
+/* ═══════════════════════════════════════════════ */
+/* MINI-DIAGNÓSTICO QUIZ                            */
+/* ═══════════════════════════════════════════════ */
+(function initQuiz(){
+  const pane = document.getElementById('quiz-pane');
+  if (!pane) return;
+  const bar = document.getElementById('quiz-bar');
+  const curEl = document.getElementById('quiz-current');
+  const totalEl = document.getElementById('quiz-total');
+
+  const QUESTIONS = [
+    {
+      q: '¿Qué piensas cuando algo te sale bien?',
+      opts: [
+        { t: 'Pude haberlo hecho mejor. Sigue sin ser suficiente.',                       p: 'A' },
+        { t: 'Espero que nadie se moleste, sienta envidia o me reclame.',                 p: 'B' },
+        { t: 'Lo enfrente una vez, y luego lo deje pasar las siguientes diez.',                                      p: 'C' },
+        { t: 'Bien por mí — pero primero, ¿están todos bien?',                            p: 'D' },
+      ]
+    },
+    {
+      q: 'Cuando alguien cruza un límite contigo, lo más común es que…',
+      opts: [
+        { t: 'Me reclame internamente por no haber sido más clara o más fuerte.',          p: 'A' },
+        { t: 'Me quede callada. Después de todo, no quiero hacer drama.',                  p: 'B' },
+        { t: 'Lo enfrente una vez, y luego lo deje pasar las siguientes diez.',            p: 'C' },
+        { t: 'Lo justifique por ellas. "Pobre, está pasando por mucho."',                  p: 'D' },
+      ]
+    },
+    {
+      q: '¿Qué frase se acerca más a lo que sientes hoy?',
+      opts: [
+        { t: '"Hago demasiado y aún así nunca alcanza."',                                  p: 'A' },
+        { t: '"Vivo desde lo que los demás esperan, no desde lo que yo quiero."',          p: 'B' },
+        { t: '"Sé qué cambiar — pero algo siempre me frena."',                             p: 'C' },
+        { t: '"Si yo no sostengo todo, todo se cae."',                                     p: 'D' },
+      ]
+    }
+  ];
+
+  const RESULTS = {
+    A: {
+      eyebrow: 'Tu perfil',
+      title: 'La que se exige <em>el doble</em>',
+      body: 'Tu autoexigencia te hizo llegar lejos — y también te tiene agotada. Por dentro nunca es suficiente, por más que hagas. No es disciplina: es una herida que confundió tu valor con tu rendimiento.',
+      pillars: [
+        { label: 'Lo que sientes', val: '"No estoy haciendo suficiente."' },
+        { label: 'Lo que mereces', val: 'Soltar el perfeccionismo sin sentir que pierdes valor.' },
+      ],
+      why: 'En <b>Segura de Ti</b> trabajamos directo con esa voz interna que te juzga — con hipnosis y herramientas para que tu valor deje de depender de tu rendimiento.'
+    },
+    B: {
+      eyebrow: 'Tu perfil',
+      title: 'La que <em>calla</em> para no incomodar',
+      body: 'Aprendiste muy temprano que ser amable es ser invisible. Hoy traduces tus emociones para que sean digeribles para los demás — y te quedas sin lugar en tu propia vida.',
+      pillars: [
+        { label: 'Lo que sientes', val: '"¿Qué van a pensar de mí?"' },
+        { label: 'Lo que mereces', val: 'Hablar y poner límites sin culpa ni miedo.' },
+      ],
+      why: 'En <b>Segura de Ti</b> reconstruimos tu voz desde adentro: 8 semanas para dejar de pedir permiso y empezar a habitarte sin disculparte.'
+    },
+    C: {
+      eyebrow: 'Tu perfil',
+      title: 'La que <em>empieza</em> y se frena sola',
+      body: 'No te falta información. Te falta confianza para sostener lo que ya sabes que mereces. Cada vez que avanzas, la duda te alcanza — y todo se queda a medias otra vez.',
+      pillars: [
+        { label: 'Lo que sientes', val: '"Ya lo intenté antes — algo siempre me frena."' },
+        { label: 'Lo que mereces', val: 'Sostener tu propio camino sin sabotearte.' },
+      ],
+      why: 'En <b>Segura de Ti</b> no es otro curso de motivación: es un proceso de 8 semanas con acompañamiento real para que esta vez sí lo termines — y lo sostengas.'
+    },
+    D: {
+      eyebrow: 'Tu perfil',
+      title: 'La que <em>sostiene</em> a todas',
+      body: 'Cuidas a todos antes que a ti. Sientes que si bajas la guardia, todo se cae. Pero llevas tanto tiempo siendo el soporte de los demás que olvidaste que tú también tienes derecho a recibir.',
+      pillars: [
+        { label: 'Lo que sientes', val: '"No es el momento de ocuparme de mí."' },
+        { label: 'Lo que mereces', val: 'Volver a ti sin sentir que abandonas a nadie.' },
+      ],
+      why: 'En <b>Segura de Ti</b> aprendes que sostenerte primero no es egoísmo: es el único camino para que lo que das venga de un lugar lleno, no vacío.'
+    }
+  };
+
+  const state = { i: 0, picks: [] };
+  totalEl.textContent = QUESTIONS.length;
+
+  function renderQuestion(){
+    const idx = state.i;
+    const q = QUESTIONS[idx];
+    curEl.textContent = idx + 1;
+    bar.style.width = ((idx)/QUESTIONS.length * 100) + '%';
+
+    const html = `
+      <div class="quiz-step">
+        <div class="text-[11px] tracking-[.22em] uppercase text-quiz-gold/70 font-semibold">Pregunta ${idx + 1}</div>
+        <h3 class="quiz-q">${escapeHtml(q.q)}</h3>
+        <div class="quiz-options" role="radiogroup">
+          ${q.opts.map((o,i) => `
+            <button type="button" class="quiz-opt" data-i="${i}" role="radio" aria-checked="false">
+              <span>${escapeHtml(o.t)}</span>
+              <span class="quiz-opt-arrow" aria-hidden="true">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>
+              </span>
+            </button>
+          `).join('')}
+        </div>
+        ${idx > 0 ? `
+          <button type="button" class="quiz-back" data-quiz-back>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 19l-7-7 7-7"/></svg>
+            Pregunta anterior
+          </button>
+        ` : ''}
+      </div>
+    `;
+
+    swapPane(html, () => {
+      pane.querySelectorAll('.quiz-opt').forEach(btn => {
+        btn.addEventListener('click', () => onPick(parseInt(btn.dataset.i, 10)));
+      });
+      const back = pane.querySelector('[data-quiz-back]');
+      if (back) back.addEventListener('click', goBack);
+    });
+  }
+
+  function onPick(optIdx){
+    const q = QUESTIONS[state.i];
+    state.picks[state.i] = q.opts[optIdx].p;
+    // brief selected highlight, then advance
+    const buttons = pane.querySelectorAll('.quiz-opt');
+    buttons.forEach((b, i) => {
+      if (i === optIdx) b.classList.add('is-selected');
+      b.disabled = true;
+    });
+    setTimeout(() => {
+      state.i++;
+      if (state.i >= QUESTIONS.length) renderResult();
+      else renderQuestion();
+    }, 280);
+  }
+
+  function goBack(){
+    if (state.i === 0) return;
+    state.i--;
+    state.picks[state.i] = undefined;
+    renderQuestion();
+  }
+
+  function tally(){
+    const counts = { A:0, B:0, C:0, D:0 };
+    state.picks.forEach(p => { if (counts[p] !== undefined) counts[p]++; });
+    // pick highest; ties → priority order based on landing emphasis
+    const order = ['A','B','C','D'];
+    let best = order[0];
+    order.forEach(k => { if (counts[k] > counts[best]) best = k; });
+    return best;
+  }
+
+  function renderResult(){
+    bar.style.width = '100%';
+    curEl.textContent = QUESTIONS.length;
+    const key = tally();
+    const r = RESULTS[key];
+
+    const html = `
+      <div class="quiz-step" role="region" aria-live="polite">
+        <span class="quiz-result-eyebrow">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6L12 3z"/></svg>
+          ${r.eyebrow}
+        </span>
+        <h3 class="quiz-result-h">${r.title}</h3>
+        <p class="quiz-result-body">${r.body}</p>
+        <div class="quiz-pillars">
+          ${r.pillars.map(p => `
+            <div class="quiz-pillar">
+              <div class="quiz-pillar-label">${escapeHtml(p.label)}</div>
+              <div class="quiz-pillar-val">${escapeHtml(p.val)}</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="mt-5 p-4 rounded-xl border border-quiz-gold/25" style="background: rgba(212,175,122,.06);">
+          <div class="text-[10.5px] tracking-[.22em] uppercase text-quiz-gold font-semibold mb-1.5">Lo que recomendamos</div>
+          <p class="text-[14px] md:text-[15px] text-cream-100/85 leading-relaxed">${r.why}</p>
+        </div>
+
+        <div class="quiz-cta-row">
+          <a href="#checkout" class="quiz-cta-primary">
+            Inscribirme al workshop
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>
+          </a>
+          <button type="button" class="quiz-cta-secondary" data-quiz-restart>
+            Volver a tomar el test
+          </button>
+        </div>
+      </div>
+    `;
+
+    swapPane(html, () => {
+      const restart = pane.querySelector('[data-quiz-restart]');
+      if (restart) restart.addEventListener('click', () => {
+        state.i = 0;
+        state.picks = [];
+        renderQuestion();
+      });
+    });
+  }
+
+  function swapPane(html, after){
+    const current = pane.querySelector('.quiz-step');
+    if (!current) {
+      pane.innerHTML = html;
+      after && after();
+      return;
+    }
+    current.classList.add('leaving');
+    setTimeout(() => {
+      pane.innerHTML = html;
+      after && after();
+    }, 220);
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  renderQuestion();
+})();
 </script>
 
 </body>
 </html>
+
+<style id="__om-edit-overrides">
+#docs-internal-guid-5e495e03-7fff-8b13-5f36-3171888e0b72 li:nth-child(3) >[role="presentation"] >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) { color: rgb(252, 246, 246) !important }
+</style>
