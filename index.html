@@ -130,7 +130,9 @@ tailwind.config = {
   .rosegold-btn svg:last-child { transition: transform .28s cubic-bezier(.2,.7,.2,1); }
   .rosegold-btn:active { transform: translateY(-1px) scale(1); }
   /* softer version for checkout-summary strip to avoid noise */
-  .rosegold-btn.subtle { animation: none; }
+  .rosegold-btn.subtle { animation: none; box-shadow: 0 1px 0 rgba(255,220,190,.4) inset, 0 -1px 0 rgba(70,30,15,.35) inset, 0 18px 40px -18px rgba(74,15,31,.5); }
+  .rosegold-btn.subtle::after { display: none; }
+  .rosegold-btn.subtle::before { display: none; }
 
   .ghost-btn {
     background: transparent; color:#F5EDE4; border:1px solid rgba(245,237,228,.35);
@@ -1877,7 +1879,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "heroHeadline": "Dejar de encogerte no es un lujo. Es el trabajo más importante que harás este año.",
   "heroEyebrow": "Workshop en vivo · 3 sesiones",
   "price": 69,
-  "priceWas": 89,
+  "priceWas": 138,
   "currency": "USD",
   "paymentDefault": "paypal",
   "variant": "cream"
@@ -1889,8 +1891,8 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
 <div class="ribbon text-cream-100 text-[10.5px] md:text-sm py-2 md:py-2.5 px-3 md:px-4 flex items-center justify-center gap-x-3 md:gap-x-4 gap-y-1 flex-wrap tracking-wide text-center">
   <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-rose-300 pulse-dot"></span> Preventa · <b class="text-rose-300 uppercase tracking-wider">Lugares limitados</b></span>
   <span class="opacity-50 hidden md:inline">·</span>
-  <span class="hidden md:inline">Cierra el <b>22 de mayo</b> · Inicia <b>29 de mayo</b></span>
-  <span class="md:hidden text-rose-300/90">Inicia <b>29 mayo</b></span>
+  <span class="hidden md:inline">Preventa cierra <b>29 de mayo</b> · Sesión 1: <b>5 de junio</b></span>
+  <span class="md:hidden text-rose-300/90">Cierra <b>29 mayo</b></span>
 </div>
 
 <!-- ═══════════ NAV ═══════════ -->
@@ -1915,7 +1917,7 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
       <a href="#faq" class="hover:text-wine-700 transition">FAQ</a>
     </div>
 
-    <a href="#checkout" class="rosegold-btn font-medium text-[11px] md:text-[13px] tracking-wider uppercase px-3.5 md:px-5 py-2 md:py-2.5 rounded-lg flex items-center gap-1.5 md:gap-2">
+    <a href="#checkout" class="rosegold-btn subtle font-medium text-[11px] md:text-[13px] tracking-wider uppercase px-3.5 md:px-5 py-2 md:py-2.5 rounded-lg flex items-center gap-1.5 md:gap-2">
       Inscribirme
       <i data-lucide="arrow-right" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
     </a>
@@ -2021,7 +2023,7 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
     <div class="reveal space-y-3 md:space-y-4 mb-8 md:mb-10">
       <div class="bg-white/70 border border-wine-700/10 rounded-xl px-5 py-4 text-[15px] md:text-[16px] text-ink-700 leading-[1.55]">Tienes logros reales, pero tu diálogo interno siempre encuentra un "pero". Nunca eres suficiente.</div>
       <div class="bg-white/70 border border-wine-700/10 rounded-xl px-5 py-4 text-[15px] md:text-[16px] text-ink-700 leading-[1.55]">Stalkeas al ex o a la comadre porque en el fondo crees que tu vida no es suficientemente interesante.</div>
-      <div class="bg-white/70 border border-wine-700/10 rounded-xl px-5 py-4 text-[15px] md:text-[16px] text-ink-700 leading-[1.55]">Ves a todos en pareja, casándose, teniendo hijos, pero sabes que nadie te elige a ti.</div>
+      <div class="bg-white/70 border border-wine-700/10 rounded-xl px-5 py-4 text-[15px] md:text-[16px] text-ink-700 leading-[1.55]">Haces todo por tener pareja y finalmente no te sientes elegida.</div>
     </div>
 
     <div class="reveal bezel mb-8 md:mb-10">
@@ -2111,7 +2113,6 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
           <video
             id="wendy-video"
             class="absolute inset-0 w-full h-full object-cover"
-            poster="assets/video-thumbnail.png"
             preload="none"
             playsinline
             controls
@@ -2120,8 +2121,17 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
             Tu navegador no soporta video HTML5.
           </video>
 
+          <!-- Thumbnail overlay — object-contain so head & footer text never crop -->
+          <img
+            id="video-thumbnail-img"
+            src="assets/video-thumbnail.png"
+            alt=""
+            class="absolute inset-0 w-full h-full object-contain pointer-events-none"
+            style="background:#1A0A10;"
+          />
+
           <!-- Custom play overlay (hidden once video starts) -->
-          <div id="video-overlay" class="absolute inset-0 flex items-center justify-center cursor-pointer group" onclick="document.getElementById('wendy-video').play(); this.style.display='none';">
+          <div id="video-overlay" class="absolute inset-0 flex items-center justify-center cursor-pointer group" onclick="document.getElementById('wendy-video').play(); document.getElementById('video-thumbnail-img').style.display='none'; this.style.display='none';">
             <div class="relative">
               <!-- Pulsing ring -->
               <div class="absolute inset-0 rounded-full bg-white/20 animate-ping scale-110"></div>
@@ -2158,22 +2168,22 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
             <div class="absolute inset-0 -z-10 blur-2xl opacity-50" style="background: radial-gradient(circle, rgba(192,139,92,.4) 0%, transparent 65%);"></div>
             <img src="assets/logo-segura-de-ti.png" alt="Logo Segura de Ti" class="w-full h-auto" style="filter: drop-shadow(0 12px 24px rgba(74,15,31,.2));" />
           </div>
-          <div class="text-[10px] md:text-[11px] tracking-[.28em] uppercase text-rose-500 font-semibold">Edición Mayo–Junio 2026</div>
+          <div class="text-[10px] md:text-[11px] tracking-[.28em] uppercase text-rose-500 font-semibold">Edición Junio 2026</div>
           <div class="font-display italic text-wine-950 text-base md:text-lg mt-1">Impartido por Wendy Requenes</div>
 
           <!-- Dates timeline -->
           <div class="mt-7 grid grid-cols-3 gap-2 md:gap-4 max-w-md mx-auto">
             <div class="border border-wine-700/15 rounded-lg px-2 py-3">
-              <div class="text-[9px] tracking-[.18em] uppercase text-ink-300">Jue · Sesión 1</div>
-              <div class="font-display text-base md:text-xl font-semibold text-wine-950 mt-0.5 leading-tight">29 May</div>
-            </div>
-            <div class="border border-wine-700/15 rounded-lg px-2 py-3">
-              <div class="text-[9px] tracking-[.18em] uppercase text-ink-300">Jue · Sesión 2</div>
+              <div class="text-[9px] tracking-[.18em] uppercase text-ink-300">Vie · Sesión 1</div>
               <div class="font-display text-base md:text-xl font-semibold text-wine-950 mt-0.5 leading-tight">5 Jun</div>
             </div>
             <div class="border border-wine-700/15 rounded-lg px-2 py-3">
-              <div class="text-[9px] tracking-[.18em] uppercase text-ink-300">Jue · Sesión 3</div>
+              <div class="text-[9px] tracking-[.18em] uppercase text-ink-300">Vie · Sesión 2</div>
               <div class="font-display text-base md:text-xl font-semibold text-wine-950 mt-0.5 leading-tight">12 Jun</div>
+            </div>
+            <div class="border border-wine-700/15 rounded-lg px-2 py-3">
+              <div class="text-[9px] tracking-[.18em] uppercase text-ink-300">Vie · Sesión 3</div>
+              <div class="font-display text-base md:text-xl font-semibold text-wine-950 mt-0.5 leading-tight">19 Jun</div>
             </div>
           </div>
           <div class="mt-3 text-[12px] text-ink-300">7:00 – 9:30 pm CDMX</div>
@@ -2229,7 +2239,7 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
               <div class="font-display italic text-rose-300 text-sm">Sesión</div>
               <div class="font-display text-5xl font-bold text-rose-300 leading-none">01</div>
             </div>
-            <div class="text-[11px] tracking-[.22em] uppercase text-cream-100/50 mb-1">Viernes 29 · Mayo</div>
+            <div class="text-[11px] tracking-[.22em] uppercase text-cream-100/50 mb-1">Viernes 5 · Junio</div>
             <h3 class="font-display text-2xl font-semibold text-cream-100 mb-3 leading-tight">El origen de la herida.</h3>
             <div class="text-[14.5px] text-cream-100/75 leading-[1.6] space-y-3">
               <p>Explorando el origen de tu inseguridad.</p>
@@ -2263,7 +2273,7 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
               <div class="font-display italic text-rose-300 text-sm">Sesión</div>
               <div class="font-display text-5xl font-bold text-rose-300 leading-none">02</div>
             </div>
-            <div class="text-[11px] tracking-[.22em] uppercase text-cream-100/50 mb-1">Viernes 5 · Junio</div>
+            <div class="text-[11px] tracking-[.22em] uppercase text-cream-100/50 mb-1">Viernes 12 · Junio</div>
             <h3 class="font-display text-2xl font-semibold text-cream-100 mb-3 leading-tight">Tu herida en el presente.</h3>
             <div class="text-[14.5px] text-cream-100/75 leading-[1.6] space-y-3">
               <div>
@@ -2301,7 +2311,7 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
               <div class="font-display italic text-rose-300 text-sm">Sesión</div>
               <div class="font-display text-5xl font-bold text-rose-300 leading-none">03</div>
             </div>
-            <div class="text-[11px] tracking-[.22em] uppercase text-cream-100/50 mb-1">Viernes 12 · Junio</div>
+            <div class="text-[11px] tracking-[.22em] uppercase text-cream-100/50 mb-1">Viernes 19 · Junio</div>
             <h3 class="font-display text-2xl font-semibold text-cream-100 mb-3 leading-tight">Tu nueva identidad.</h3>
             <div class="text-[14.5px] text-cream-100/75 leading-[1.6] space-y-3">
               <p>Tu historia a tu favor: tu primera historia de seguridad y confianza.</p>
@@ -2652,7 +2662,7 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
                 <text x="62" y="18" font-family="Inter" font-size="5" fill="#8A6E78" stroke="none">sistémico inicial</text>
               </g>
               <!-- Right page: prompts + check boxes -->
-              <text x="190" y="40" font-family="Playfair Display" font-style="italic" font-size="11" fill="#4A0F1F">Prompts de reflexión</text>
+              <text x="190" y="40" font-family="Playfair Display" font-style="italic" font-size="11" fill="#4A0F1F">Preguntas de reflexión</text>
               <g font-family="Inter" font-size="6.5" fill="#4A2A35">
                 <rect x="190" y="58" width="6" height="6" fill="none" stroke="#7A1F2E" stroke-width=".6"/>
                 <text x="202" y="63">¿Qué voz escucho cuando dudo?</text>
@@ -3266,7 +3276,7 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
         <div class="relative bezel rounded-[22px]">
           <div class="bezel-inner rounded-[19px] overflow-hidden">
             <div class="aspect-[4/5] relative bg-gradient-to-b from-cream-200 to-wine-900/10">
-              <img src="assets/wendy-portrait.jpeg" alt="Wendy Requenes, psicóloga clínica"
+              <img src="assets/wendy-portrait.jpeg?v=2" alt="Wendy Requenes, psicóloga clínica"
                    class="absolute inset-0 w-full h-full object-cover object-top"
                    loading="lazy" />
               <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/35 to-transparent pointer-events-none"></div>
@@ -3314,8 +3324,14 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
               Como psicóloga, facilitadora de grupos y conferencista especializada en <b class="not-italic font-sans font-semibold text-wine-700">Desarrollo Humano</b>, <b class="not-italic font-sans font-semibold text-wine-700">Terapia Familiar Breve Sistémica</b> e <b class="not-italic font-sans font-semibold text-wine-700">Hipnosis Clínica</b>, llevo más de una década acompañando a mujeres a trabajar con lo que normalmente evitan: esas heridas que las hacen abandonar sus sueños, sus metas. Abandonarse a sí mismas.
             </p>
           </div>
+          <!-- Callout quote -->
+          <blockquote class="mt-6 border-l-4 border-rose-500 pl-5 py-1">
+            <p class="font-display italic text-wine-700 text-[17px] md:text-[18.5px] leading-[1.6]">
+              "No te voy a decir que te quieras más,<br/>te voy a llevar ahí."
+            </p>
+          </blockquote>
           <p class="mt-5 text-ink-500 text-[15.5px] leading-[1.72]">
-            No te voy a decir que "te quieras más". Mi método integra terapia breve, psicología humanista e hipnosis clínica. Va directo a la raíz, no a los síntomas. Por eso funciona.
+            Mi método integra terapia breve, psicología humanista e hipnosis clínica. Va directo a la raíz, no a los síntomas. Por eso funciona.
           </p>
           <p class="mt-4 text-ink-500 text-[15.5px] leading-[1.72]">
             Fundé el <b class="text-wine-700 font-semibold">Instituto de Desarrollo Personal SanaMente</b> con la misión de brindar herramientas y acompañamiento personalizado a través de workshops, certificaciones y diplomados para mujeres como tú. No prometo atajos, prometo el trabajo profundo que transforma desde adentro.
@@ -3571,7 +3587,7 @@ Regálate la oportunidad de ser, finalmente, más <b>Segura de ti</b>.
       </div>
 
       <!-- ══ Testimonio 03 · Norma Martínez ══ -->
-      <div class="reveal delay-3 wa-phone sm:col-span-2 lg:col-span-1">
+      <div class="reveal delay-3 wa-phone">
         <div class="wa-bar">
           <div class="wa-bar-back">‹</div>
           <div class="wa-bar-avatar" style="background:linear-gradient(135deg,#0891b2,#164e63)">N</div>
@@ -3594,6 +3610,89 @@ Aprendí que sanar no es eliminar o borrar si no aprender de todo lo vivido para
 
 También me ha ayudado a entender mi dependencia emocional, he roto patrones, he mejorado mis relaciones e inicié mi camino a una vida más consciente y saludable emocionalmente.
             <span class="wa-meta">09:28 <span class="wa-checks">✓✓</span></span>
+          </div>
+        </div>
+        <div class="wa-input-bar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667781" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          <div class="wa-input-field">Escribe un mensaje</div>
+          <div class="wa-send-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ Testimonio 04 · María Isabel Avelar ══ -->
+      <div class="reveal delay-4 wa-phone">
+        <div class="wa-bar">
+          <div class="wa-bar-back">‹</div>
+          <div class="wa-bar-avatar" style="background:linear-gradient(135deg,#d97706,#92400e)">M</div>
+          <div class="wa-bar-info">
+            <div class="wa-bar-name">María Isabel Avelar</div>
+            <div class="wa-bar-status">Segura de Ti · Grupo privado</div>
+          </div>
+          <div class="wa-bar-icons">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.79a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          </div>
+        </div>
+        <div class="wa-chat">
+          <div class="wa-date-chip">Hoy</div>
+          <div class="wa-bubble wa-them">
+            <span class="wa-name" style="color:#d97706">María Isabel Avelar</span>✨ Antes de vivir este tipo de procesos, yo no entendía cuánto de mi inseguridad venía de heridas que ni siquiera sabía que existían. Vivía reaccionando, dudando de mí, queriendo hacerlo todo bien pero sintiendo que algo dentro de mí no era suficiente.
+
+💖 Tomar este curso fue un antes y un después. No solo entendí mis heridas… me encontré conmigo.
+
+Aprendí a ponerle nombre a lo que sentía, a dejar de juzgarme, y sobre todo, a verme con más amor. Fue un espacio seguro, real, donde pude abrirme sin miedo.
+
+Lo que más me impactó fue lo personalizado que es todo. No eres "una más". Te sientes vista, sostenida y guiada de una forma muy humana y cercana.
+
+Hoy me siento más segura de mí. Tomo decisiones desde otro lugar. Me priorizo sin culpa. Y sobre todo… confío más en quién soy.
+
+Si estás dudando, este espacio es para ti. Es un regalo que te haces para empezar a vivir desde tu seguridad y tu amor propio. 💖
+
+Y recuerda: no viniste a encajar… viniste a ser tú.
+            <span class="wa-meta">11:07 <span class="wa-checks">✓✓</span></span>
+          </div>
+        </div>
+        <div class="wa-input-bar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667781" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          <div class="wa-input-field">Escribe un mensaje</div>
+          <div class="wa-send-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ Testimonio 05 · Alexandra Ionescu ══ -->
+      <div class="reveal delay-5 wa-phone sm:col-span-2 lg:col-span-1">
+        <div class="wa-bar">
+          <div class="wa-bar-back">‹</div>
+          <div class="wa-bar-avatar" style="background:linear-gradient(135deg,#059669,#065f46)">A</div>
+          <div class="wa-bar-info">
+            <div class="wa-bar-name">Alexandra Ionescu</div>
+            <div class="wa-bar-status">Segura de Ti · Grupo privado</div>
+          </div>
+          <div class="wa-bar-icons">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.79a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          </div>
+        </div>
+        <div class="wa-chat">
+          <div class="wa-date-chip">Hoy</div>
+          <div class="wa-bubble wa-them">
+            <span class="wa-name" style="color:#059669">Alexandra Ionescu · Life Coach</span>Hubo un momento en mi vida en el que me sentía perdida, confundida y desconectada de mí misma. Sabía que algo dentro de mí necesitaba atención, pero no lograba encontrar sola las respuestas.
+
+Fue ahí cuando empecé mi proceso con Wendy Requenes.
+A través de sus cursos y su acompañamiento, empecé a entenderme mejor y a trabajar en mí desde un lugar más consciente.
+
+No es un camino inmediato ni de resultados de un día para otro.
+Hoy soy una mujer más segura de mí, con más confianza y con una relación mucho más sana conmigo misma y con los demás.
+
+Y desde ese lugar, también he empezado a creer más en lo que quiero construir, en mis sueños y en lo que soy capaz de lograr.
+
+Si estás en un momento en el que necesitas claridad o volver a ti, te lo digo desde mi experiencia:
+invertir en ti no es un gasto, es una de las decisiones más valiosas que puedes tomar.
+
+Regálate la oportunidad de conocerte, de sanar y de convertirte en una versión más alineada contigo misma.
+            <span class="wa-meta">14:53 <span class="wa-checks">✓✓</span></span>
           </div>
         </div>
         <div class="wa-input-bar">
@@ -3869,7 +3968,7 @@ también recibes.</h2>
     <!-- CTA -->
     <div class="reveal text-center mt-8 md:mt-10">
       <a href="#checkout" class="rosegold-btn inline-flex font-medium text-[12.5px] md:text-[13px] tracking-[.15em] uppercase px-7 md:px-8 py-3.5 md:py-4 rounded-lg items-center gap-3">ESTOY LISTA PARA INVERTIR EN MÍ</a>
-      <div class="mt-3 text-[11px] tracking-[.18em] uppercase text-ink-300">Tarifa preventa · cierra 22 may</div>
+      <div class="mt-3 text-[11px] tracking-[.18em] uppercase text-ink-300">Tarifa preventa · cierra 29 may</div>
     </div>
   </div>
 </section>
@@ -3892,7 +3991,7 @@ también recibes.</h2>
           <span class="font-display text-lg md:text-xl font-semibold text-wine-950">¿Puedo asistir si vivo en Estados Unidos u otro país?</span>
           <i data-lucide="chevron-down" class="w-5 h-5 text-rose-500 faq-chevron flex-shrink-0"></i>
         </summary>
-        <p class="mt-4 text-[14.5px] text-ink-500 leading-relaxed">Sí. El taller es 100% en línea por Zoom. Jueves 15, 22 y 29 de mayo de 7:00 a 9:30 pm hora CDMX (GMT-6). Revisa tu diferencia horaria al inscribirte.</p>
+        <p class="mt-4 text-[14.5px] text-ink-500 leading-relaxed">Sí. El taller es 100% en línea por Zoom. Viernes 5, 12 y 19 de junio de 7:00 a 9:30 pm hora CDMX (GMT-6). <b>Revisa tu diferencia horaria al inscribirte.</b></p>
       </details>
       <details class="group bg-white/70 border border-wine-700/10 rounded-xl p-5 md:p-6 transition hover:border-rose-500/40">
         <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
@@ -3962,7 +4061,7 @@ también recibes.</h2>
             </div>
             <div>
               <div class="font-display text-lg font-semibold">Workshop Segura de Ti</div>
-              <div class="text-[12px] text-cream-100/60 mt-0.5">Edición mayo · 3 sesiones online en vivo</div>
+              <div class="text-[12px] text-cream-100/60 mt-0.5">Edición junio · 3 sesiones online en vivo</div>
             </div>
           </div>
 
@@ -4005,32 +4104,28 @@ también recibes.</h2>
             <div>
               <div class="text-[11px] tracking-[.22em] uppercase text-wine-700 font-semibold mb-3 flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-wine-700 text-cream-100 text-[10px] flex items-center justify-center font-bold">1</span> Tus datos</div>
               <div class="grid grid-cols-2 gap-3">
-                <div><label class="text-[11px] text-ink-300 uppercase tracking-wider">Nombre</label><input class="inp mt-1" required placeholder="Ej. María" /></div>
-                <div><label class="text-[11px] text-ink-300 uppercase tracking-wider">Apellido</label><input class="inp mt-1" required placeholder="Ej. García" /></div>
+                <div><label class="text-[11px] text-ink-300 uppercase tracking-wider">Nombre</label><input id="ck-nombre" class="inp mt-1" required placeholder="Ej. María" /></div>
+                <div><label class="text-[11px] text-ink-300 uppercase tracking-wider">Apellido</label><input id="ck-apellido" class="inp mt-1" required placeholder="Ej. García" /></div>
               </div>
-              <div class="mt-3"><label class="text-[11px] text-ink-300 uppercase tracking-wider">Email</label><input type="email" class="inp mt-1" required placeholder="tu@email.com" /></div>
-              <div class="mt-3"><label class="text-[11px] text-ink-300 uppercase tracking-wider">WhatsApp (para acceso al grupo)</label><input type="tel" class="inp mt-1" placeholder="+52 55 1234 5678" /></div>
+              <div class="mt-3"><label class="text-[11px] text-ink-300 uppercase tracking-wider">Email</label><input id="ck-email" type="email" class="inp mt-1" required placeholder="tu@email.com" /></div>
+              <div class="mt-3"><label class="text-[11px] text-ink-300 uppercase tracking-wider">WhatsApp (para acceso al grupo)</label><input id="ck-wa" type="tel" class="inp mt-1" placeholder="+52 55 1234 5678" /></div>
             </div>
 
             <!-- Payment method -->
             <div>
               <div class="text-[11px] tracking-[.22em] uppercase text-wine-700 font-semibold mb-3 flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-wine-700 text-cream-100 text-[10px] flex items-center justify-center font-bold">2</span> Método de pago</div>
 
+              <!-- ── Payment method cards ── -->
               <div class="grid grid-cols-3 gap-2.5">
+                <!-- Stripe -->
                 <button type="button" data-method="stripe" class="pay-card text-left p-3.5 rounded-lg border border-wine-700/15 bg-white hover:border-rose-500/60" data-selected="true">
                   <div class="flex items-center justify-between">
                     <svg viewBox="0 0 60 25" class="h-5"><text x="0" y="19" font-family="Inter" font-weight="800" font-size="22" fill="#635BFF">stripe</text></svg>
                     <i data-lucide="check-circle-2" class="w-4 h-4 text-rose-500 check-indicator"></i>
                   </div>
-                  <div class="mt-2 text-[11px] text-ink-300">Visa · Mastercard · Amex</div>
+                  <div class="mt-2 text-[11px] text-ink-300">Tarjeta · Apple Pay · OXXO</div>
                 </button>
-                <button type="button" data-method="paypal" class="pay-card text-left p-3.5 rounded-lg border border-wine-700/15 bg-white hover:border-rose-500/60">
-                  <div class="flex items-center justify-between">
-                    <svg viewBox="0 0 80 22" class="h-5"><text x="0" y="18" font-family="Inter" font-weight="800" font-size="20" font-style="italic" fill="#003087">Pay</text><text x="40" y="18" font-family="Inter" font-weight="800" font-size="20" font-style="italic" fill="#009CDE">Pal</text></svg>
-                    <i data-lucide="check-circle-2" class="w-4 h-4 text-rose-500 check-indicator opacity-0"></i>
-                  </div>
-                  <div class="mt-2 text-[11px] text-ink-300">Cuenta PayPal o tarjeta</div>
-                </button>
+                <!-- MercadoPago -->
                 <button type="button" data-method="mercadopago" class="pay-card text-left p-3.5 rounded-lg border border-wine-700/15 bg-white hover:border-rose-500/60">
                   <div class="flex items-center justify-between">
                     <svg viewBox="0 0 120 22" class="h-5"><circle cx="11" cy="11" r="8" fill="#00B1EA"/><text x="23" y="17" font-family="Inter" font-weight="700" font-size="15" fill="#2D3277">Mercado</text><text x="82" y="17" font-family="Inter" font-weight="700" font-size="15" fill="#2D3277">Pago</text></svg>
@@ -4038,52 +4133,98 @@ también recibes.</h2>
                   </div>
                   <div class="mt-2 text-[11px] text-ink-300">MXN · ARS · BRL · COP</div>
                 </button>
+                <!-- Transferencia -->
+                <button type="button" data-method="transferencia" class="pay-card text-left p-3.5 rounded-lg border border-wine-700/15 bg-white hover:border-rose-500/60">
+                  <div class="flex items-center justify-between">
+                    <i data-lucide="landmark" class="w-5 h-5 text-wine-700"></i>
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-rose-500 check-indicator opacity-0"></i>
+                  </div>
+                  <div class="mt-2 text-[12px] font-semibold text-wine-950">Transferencia</div>
+                  <div class="text-[11px] text-ink-300">SPEI · depósito</div>
+                </button>
               </div>
 
-              <!-- Stripe fields (default) -->
-              <div id="fields-stripe" class="mt-4 space-y-3 pay-fields">
-                <div><label class="text-[11px] text-ink-300 uppercase tracking-wider">Número de tarjeta</label>
-                  <div class="inp mt-1 flex items-center gap-2">
-                    <i data-lucide="credit-card" class="w-4 h-4 text-ink-300"></i>
-                    <input class="flex-1 outline-none bg-transparent" placeholder="4242 4242 4242 4242" />
-                    <div class="flex items-center gap-1 text-[10px] text-ink-300 font-semibold">VISA · MC · AMEX</div>
+              <!-- ── Stripe panel ── -->
+              <div id="fields-stripe" class="mt-4 pay-fields">
+                <div class="rounded-xl border border-[#635BFF]/20 bg-[#635BFF]/4 p-5 space-y-4">
+                  <!-- Accepted methods logos -->
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-[10px] uppercase tracking-wider text-ink-300 mr-1">Acepta:</span>
+                    <!-- Visa -->
+                    <svg viewBox="0 0 48 16" class="h-4"><rect width="48" height="16" rx="3" fill="#1A1F71"/><text x="5" y="12" font-family="Inter" font-weight="800" font-size="11" fill="white" letter-spacing="1">VISA</text></svg>
+                    <!-- MC -->
+                    <svg viewBox="0 0 36 24" class="h-4"><rect width="36" height="24" rx="3" fill="#EB001B" opacity=".1"/><circle cx="13" cy="12" r="8" fill="#EB001B"/><circle cx="23" cy="12" r="8" fill="#F79E1B"/><path d="M18 6.3a8 8 0 010 11.4A8 8 0 0118 6.3z" fill="#FF5F00"/></svg>
+                    <!-- Amex -->
+                    <svg viewBox="0 0 44 16" class="h-4"><rect width="44" height="16" rx="3" fill="#2E77BC"/><text x="4" y="12" font-family="Inter" font-weight="700" font-size="9" fill="white" letter-spacing=".5">AMEX</text></svg>
+                    <!-- Apple Pay -->
+                    <svg viewBox="0 0 42 20" class="h-4"><rect width="42" height="20" rx="3" fill="#000"/><text x="5" y="15" font-family="Inter" font-weight="600" font-size="10" fill="white"> Pay</text></svg>
+                    <!-- Google Pay -->
+                    <svg viewBox="0 0 52 20" class="h-4"><rect width="52" height="20" rx="3" fill="#fff" stroke="#e0e0e0"/><text x="4" y="14" font-family="Inter" font-weight="600" font-size="9.5" fill="#5f6368">G<tspan fill="#4285F4">o</tspan><tspan fill="#EA4335">o</tspan><tspan fill="#FBBC04">g</tspan><tspan fill="#34A853">l</tspan><tspan fill="#4285F4">e</tspan> Pay</text></svg>
+                    <!-- OXXO -->
+                    <svg viewBox="0 0 44 20" class="h-4"><rect width="44" height="20" rx="3" fill="#E31837"/><text x="5" y="15" font-family="Inter" font-weight="800" font-size="11" fill="white">OXXO</text></svg>
+                    <!-- Klarna -->
+                    <svg viewBox="0 0 52 20" class="h-4"><rect width="52" height="20" rx="3" fill="#FFB3C7"/><text x="6" y="14" font-family="Inter" font-weight="700" font-size="10" fill="#17120F">klarna</text></svg>
+                  </div>
+                  <div class="text-[13px] text-ink-600 leading-relaxed">
+                    El pago se procesa de forma segura en la plataforma de Stripe. Podrás pagar con tarjeta, Apple Pay, Google Pay, OXXO o en <strong>cuotas vía Klarna</strong> — sin salir del sitio.
+                  </div>
+                  <div class="flex items-center gap-2 text-[11px] text-ink-300">
+                    <i data-lucide="lock" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                    Encriptación SSL 256-bit · No almacenamos datos de tarjeta
                   </div>
                 </div>
-                <div class="grid grid-cols-3 gap-3">
-                  <div><label class="text-[11px] text-ink-300 uppercase tracking-wider">Vencimiento</label><input class="inp mt-1" placeholder="MM / AA" /></div>
-                  <div><label class="text-[11px] text-ink-300 uppercase tracking-wider">CVC</label><input class="inp mt-1" placeholder="123" /></div>
-                  <div><label class="text-[11px] text-ink-300 uppercase tracking-wider">CP</label><input class="inp mt-1" placeholder="06700" /></div>
-                </div>
               </div>
 
-              <!-- PayPal fields (hidden default) -->
-              <div id="fields-paypal" class="mt-4 pay-fields hidden">
-                <div class="rounded-lg border border-wine-700/15 bg-white p-5 text-center">
-                  <div class="font-display text-xl text-wine-950">Te redirigiremos a PayPal</div>
-                  <p class="text-[13px] text-ink-500 mt-2 max-w-sm mx-auto">Al confirmar, abrimos tu cuenta de PayPal en una nueva ventana para completar el pago de forma segura.</p>
-                  <div class="mt-4 flex items-center justify-center gap-2 text-[11px] text-ink-300"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Protección al comprador PayPal</div>
-                </div>
-              </div>
-
-              <!-- Mercado Pago fields (hidden default) -->
+              <!-- ── MercadoPago panel ── -->
               <div id="fields-mercadopago" class="mt-4 pay-fields hidden">
-                <div class="rounded-lg border border-wine-700/15 bg-white p-5">
-                  <div class="font-display text-lg text-wine-950 mb-2">Paga en tu moneda local</div>
-                  <div class="grid grid-cols-4 gap-2 text-[12px]">
+                <div class="rounded-xl border border-[#00B1EA]/20 bg-[#00B1EA]/5 p-5">
+                  <div class="font-semibold text-wine-950 mb-1">Paga en tu moneda local</div>
+                  <div class="grid grid-cols-4 gap-2 text-[12px] mt-3">
                     <label class="border border-wine-700/15 rounded-lg p-2 text-center cursor-pointer hover:border-rose-500"><input type="radio" name="mp-currency" class="hidden" checked><div class="font-semibold text-wine-950">MXN</div><div class="text-ink-300 text-[10px]">$1,380</div></label>
                     <label class="border border-wine-700/15 rounded-lg p-2 text-center cursor-pointer hover:border-rose-500"><input type="radio" name="mp-currency" class="hidden"><div class="font-semibold text-wine-950">ARS</div><div class="text-ink-300 text-[10px]">$69,000</div></label>
                     <label class="border border-wine-700/15 rounded-lg p-2 text-center cursor-pointer hover:border-rose-500"><input type="radio" name="mp-currency" class="hidden"><div class="font-semibold text-wine-950">BRL</div><div class="text-ink-300 text-[10px]">R$345</div></label>
                     <label class="border border-wine-700/15 rounded-lg p-2 text-center cursor-pointer hover:border-rose-500"><input type="radio" name="mp-currency" class="hidden"><div class="font-semibold text-wine-950">COP</div><div class="text-ink-300 text-[10px]">$280,000</div></label>
                   </div>
-                  <p class="text-[12px] text-ink-500 mt-3">Se abrirá el checkout de Mercado Pago para terminar la compra con tarjeta, efectivo o saldo.</p>
+                  <p class="text-[12px] text-ink-500 mt-3">Se abrirá el checkout de Mercado Pago con tarjeta, efectivo o saldo disponible.</p>
+                </div>
+              </div>
+
+              <!-- ── Transferencia panel ── -->
+              <div id="fields-transferencia" class="mt-4 pay-fields hidden space-y-3">
+                <div class="rounded-xl border border-wine-700/15 bg-white overflow-hidden">
+                  <div class="bg-wine-950 px-5 py-3 flex items-center gap-2">
+                    <i data-lucide="landmark" class="w-4 h-4 text-rose-300"></i>
+                    <span class="text-[12px] tracking-[.18em] uppercase font-semibold text-cream-100">AFIRME — Datos bancarios</span>
+                  </div>
+                  <div class="p-5 space-y-0 divide-y divide-wine-700/8 text-[13.5px]">
+                    <div class="flex justify-between py-2.5">
+                      <span class="text-ink-300">Banco</span>
+                      <span class="font-semibold text-wine-950">AFIRME</span>
+                    </div>
+                    <div class="flex justify-between py-2.5">
+                      <span class="text-ink-300">No. de tarjeta</span>
+                      <span class="font-mono font-semibold text-wine-950 tracking-widest text-[13px]">4320 4901 0974 3169</span>
+                    </div>
+                    <div class="flex justify-between py-2.5">
+                      <span class="text-ink-300">No. de cuenta</span>
+                      <span class="font-mono font-semibold text-wine-950">196112359</span>
+                    </div>
+                    <div class="flex justify-between py-2.5">
+                      <span class="text-ink-300">CLABE</span>
+                      <span class="font-mono font-semibold text-wine-950 text-[12.5px] tracking-wider">062580 00196112359 6</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="rounded-xl bg-[#25D366]/8 border border-[#25D366]/25 p-4 space-y-2">
+                  <p class="text-[13px] text-ink-700 leading-relaxed"><strong>Siguiente paso:</strong> Realiza la transferencia y envía tu comprobante por WhatsApp. Tu lugar queda reservado al recibirlo.</p>
                 </div>
               </div>
             </div>
 
             <!-- Submit -->
-            <button type="submit" class="rosegold-btn w-full py-5 rounded-lg font-semibold text-[13px] tracking-[.18em] uppercase flex items-center justify-center gap-3">
-              <i data-lucide="lock" class="w-4 h-4"></i>
-              Confirmar inscripción · $<span id="btn-total">69</span> USD
+            <button type="submit" id="ck-submit-btn" class="rosegold-btn w-full py-5 rounded-lg font-semibold text-[13px] tracking-[.18em] uppercase flex items-center justify-center gap-3">
+              <i data-lucide="lock" class="w-4 h-4" id="ck-submit-icon"></i>
+              <span id="ck-submit-label">Pagar con Stripe · $<span id="btn-total">69</span> USD</span>
             </button>
 
             <p class="text-[11.5px] text-ink-300 text-center leading-relaxed">
@@ -4135,9 +4276,9 @@ también recibes.</h2>
 <div id="mobile-cta" class="fixed bottom-0 inset-x-0 md:hidden z-50 bg-cream-50/95 backdrop-blur border-t border-wine-700/15 p-3 flex items-center gap-3 translate-y-full transition-transform duration-300">
   <div class="flex-1">
     <div class="text-[10px] uppercase tracking-wider text-ink-300">Preventa</div>
-    <div class="font-display text-xl font-bold text-wine-700">$69 <span class="text-sm line-through text-ink-300 font-normal">$89</span></div>
+    <div class="font-display text-xl font-bold text-wine-700">$69 <span class="text-sm line-through text-ink-300 font-normal">$138</span></div>
   </div>
-  <a href="#checkout" class="rosegold-btn flex-1 text-center py-3 rounded-lg text-[12px] tracking-widest uppercase font-semibold">Inscribirme</a>
+  <a href="#checkout" class="rosegold-btn subtle flex-1 text-center py-3 rounded-lg text-[12px] tracking-widest uppercase font-semibold">Inscribirme</a>
 </div>
 
 <!-- ═══════════════════════════════════════════════ -->
@@ -4188,13 +4329,11 @@ const io = new IntersectionObserver((entries)=>{
 }, { threshold: .12, rootMargin: '0px 0px -8% 0px' });
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* Countdown (to a target date in the near future) */
+/* Countdown — preventa cierra 29 mayo 2026 23:59:59 CDMX (UTC-6) */
 function startCountdown(){
-  const target = new Date();
-  target.setDate(target.getDate() + 8);
-  target.setHours(23, 59, 59, 0);
+  const target = new Date('2026-05-30T05:59:59Z'); /* 29-may 23:59 CDMX = 30-may 05:59 UTC */
 
-  const el = document.getElementById('hero-countdown');
+  const el = document.getElementById('workshop-countdown');
   if(!el) return;
   function tick(){
     const now = new Date();
@@ -4292,6 +4431,34 @@ payCards.forEach(card=>{
   card.addEventListener('click', ()=> selectPayment(card.dataset.method));
 });
 
+/* ── Stripe Payment Links ── */
+const STRIPE_LINKS = {
+  preventa: 'https://buy.stripe.com/aFa6oH3cY8YSg1g7O51wY17',
+  regular:  'https://buy.stripe.com/8x27sL3cYa2W2aq4BT1wY18'
+};
+const PREVENTA_DEADLINE = new Date('2026-05-30T05:59:59Z'); /* 29-may 23:59 CDMX */
+function getStripeLink(){
+  return new Date() < PREVENTA_DEADLINE ? STRIPE_LINKS.preventa : STRIPE_LINKS.regular;
+}
+
+/* ── Button label map ── */
+const SUBMIT_LABELS = {
+  stripe:        () => `Pagar con Stripe · $${document.getElementById('btn-total').textContent} USD`,
+  mercadopago:   () => 'Continuar con Mercado Pago →',
+  transferencia: () => 'Enviar comprobante por WhatsApp →'
+};
+const SUBMIT_ICONS = {
+  stripe: 'lock', mercadopago: 'arrow-right', transferencia: 'message-circle'
+};
+
+function updateSubmitBtn(method){
+  const label = document.getElementById('ck-submit-label');
+  const icon  = document.getElementById('ck-submit-icon');
+  if(label && SUBMIT_LABELS[method]) label.innerHTML = SUBMIT_LABELS[method]();
+  if(icon)  icon.setAttribute('data-lucide', SUBMIT_ICONS[method] || 'lock');
+  lucide.createIcons();
+}
+
 function selectPayment(method){
   payCards.forEach(c=>{
     const sel = c.dataset.method === method;
@@ -4300,7 +4467,9 @@ function selectPayment(method){
     if(indicator) indicator.style.opacity = sel ? '1' : '0';
   });
   document.querySelectorAll('.pay-fields').forEach(f=> f.classList.add('hidden'));
-  document.getElementById('fields-'+method).classList.remove('hidden');
+  const panel = document.getElementById('fields-'+method);
+  if(panel) panel.classList.remove('hidden');
+  updateSubmitBtn(method);
 }
 
 /* Split pay toggle */
@@ -4309,13 +4478,51 @@ document.getElementById('splitPay').addEventListener('change', (e)=>{
   const val = e.target.checked ? Math.ceil(base / 2) : base;
   document.getElementById('ck-total').textContent = e.target.checked ? `${val} × 2 = ${base}` : base;
   document.getElementById('btn-total').textContent = e.target.checked ? `${val} (hoy)` : base;
+  updateSubmitBtn(document.querySelector('.pay-card[data-selected="true"]')?.dataset.method || 'stripe');
 });
 
-/* Checkout submission (demo) */
+/* WhatsApp comprobante helper */
+function openWhatsAppComprobante(){
+  const nombre  = (document.getElementById('ck-nombre')?.value || '').trim();
+  const apellido= (document.getElementById('ck-apellido')?.value || '').trim();
+  const email   = (document.getElementById('ck-email')?.value || '').trim();
+  const wa      = (document.getElementById('ck-wa')?.value || '').trim();
+  const precio  = document.getElementById('ck-total')?.textContent || '69';
+  const full    = [nombre, apellido].filter(Boolean).join(' ') || '(sin nombre)';
+  const msg = `Hola Wendy 👋 Me acabo de inscribir al Workshop *Segura de Ti*.\n\n` +
+              `🌸 *Nombre:* ${full}\n📧 *Email:* ${email || '(sin email)'}\n` +
+              (wa ? `📱 *WhatsApp:* ${wa}\n` : '') +
+              `💳 *Monto transferido:* $${precio} USD\n\n` +
+              `Te adjunto mi comprobante de transferencia. 🙏`;
+  window.open(`https://wa.me/528110240368?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+/* Checkout submission */
 function handleCheckout(e){
   e.preventDefault();
-  const method = document.querySelector('.pay-card[data-selected="true"]').dataset.method;
-  alert(`✓ ¡Lista! Procesando pago vía ${method}.\n\n(Demo — aquí conectarías con la API de ${method}.)`);
+  const method = document.querySelector('.pay-card[data-selected="true"]')?.dataset.method || 'stripe';
+
+  if(method === 'stripe'){
+    const url = getStripeLink();
+    /* Pre-fill email if possible via query param */
+    const email = document.getElementById('ck-email')?.value?.trim();
+    const final = email ? url + (url.includes('?') ? '&' : '?') + 'prefilled_email=' + encodeURIComponent(email) : url;
+    const w=500, h=750, left=Math.round((screen.width-w)/2), top=Math.round((screen.height-h)/2);
+    const popup = window.open(final,'stripe_checkout',`width=${w},height=${h},left=${left},top=${top},scrollbars=yes,resizable=yes`);
+    if(!popup){ window.open(final,'_blank'); } /* fallback if popup blocked */
+    return;
+  }
+
+  if(method === 'mercadopago'){
+    /* MercadoPago — agrega tu Payment Link de MP cuando lo tengas */
+    alert('Mercado Pago: conecta tu Payment Link de MP en la variable MERCADOPAGO_LINK.');
+    return;
+  }
+
+  if(method === 'transferencia'){
+    openWhatsAppComprobante();
+    return;
+  }
 }
 
 /* Mobile sticky CTA */
