@@ -2083,6 +2083,67 @@ let TWEAKS = { ...TWEAK_DEFAULTS };
 </section>
 
 <!-- ═══════════════════════════════════════════════ -->
+<!-- 1.8 ▸ VIDEO WENDY — MI HISTORIA                -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="video-wendy" class="relative bg-wine-950 py-16 md:py-28 px-4 md:px-8 overflow-hidden">
+  <!-- Soft background glows -->
+  <div aria-hidden="true" class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-rose-500/10 blur-3xl pointer-events-none"></div>
+  <div aria-hidden="true" class="absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-lilac-500/10 blur-3xl pointer-events-none"></div>
+
+  <div class="relative max-w-4xl mx-auto text-cream-100">
+
+    <!-- Header -->
+    <div class="reveal text-center max-w-3xl mx-auto mb-10 md:mb-14">
+      <div class="eyebrow centered text-rose-300">Un mensaje de Wendy</div>
+      <h2 class="font-display text-3xl md:text-5xl lg:text-6xl font-semibold mt-4 leading-[1.08] text-cream-100">
+        Antes de contarte cómo funciona esto…
+      </h2>
+      <p class="mt-5 text-cream-100/75 text-[15.5px] md:text-[17px] leading-[1.7] max-w-2xl mx-auto font-display italic">
+        Quiero que sepas que nada de lo que verás aquí nació únicamente de la teoría,<br class="hidden md:block"/>
+        nació de vivirlo en carne propia.
+      </p>
+    </div>
+
+    <!-- Video player -->
+    <div class="reveal bezel max-w-3xl mx-auto">
+      <div class="bezel-inner overflow-hidden rounded-[19px]">
+        <div class="relative w-full" style="padding-bottom: 56.25%;">
+          <video
+            id="wendy-video"
+            class="absolute inset-0 w-full h-full object-cover"
+            poster="assets/video-thumbnail.png"
+            preload="none"
+            playsinline
+            controls
+          >
+            <source src="assets/video-wendy-historia.mp4" type="video/mp4" />
+            Tu navegador no soporta video HTML5.
+          </video>
+
+          <!-- Custom play overlay (hidden once video starts) -->
+          <div id="video-overlay" class="absolute inset-0 flex items-center justify-center cursor-pointer group" onclick="document.getElementById('wendy-video').play(); this.style.display='none';">
+            <div class="relative">
+              <!-- Pulsing ring -->
+              <div class="absolute inset-0 rounded-full bg-white/20 animate-ping scale-110"></div>
+              <!-- Play button -->
+              <div class="relative w-18 h-18 md:w-24 md:h-24 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-105 transition-transform duration-200" style="background: rgba(122,31,46,.85); backdrop-filter: blur(4px); width:72px; height:72px;">
+                <svg class="ml-1.5" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Micro-trust line below video -->
+    <p class="reveal text-center mt-6 text-cream-100/45 text-[12.5px] tracking-[.15em] uppercase">
+      Video · Wendy Requenes · Psicóloga, Mentora y Conferencista
+    </p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
 <!-- 2 ▸ WORKSHOP INFO + LOGO                       -->
 <!-- ═══════════════════════════════════════════════ -->
 <section id="workshop" class="relative bg-cream-100 py-16 md:py-32 px-4 md:px-8">
