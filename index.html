@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
 
 <script>
 tailwind.config = {
@@ -4150,23 +4151,16 @@ también recibes.</h2>
                   <!-- Accepted methods logos -->
                   <div class="flex flex-wrap items-center gap-2">
                     <span class="text-[10px] uppercase tracking-wider text-ink-300 mr-1">Acepta:</span>
-                    <!-- Visa -->
                     <svg viewBox="0 0 48 16" class="h-4"><rect width="48" height="16" rx="3" fill="#1A1F71"/><text x="5" y="12" font-family="Inter" font-weight="800" font-size="11" fill="white" letter-spacing="1">VISA</text></svg>
-                    <!-- MC -->
                     <svg viewBox="0 0 36 24" class="h-4"><rect width="36" height="24" rx="3" fill="#EB001B" opacity=".1"/><circle cx="13" cy="12" r="8" fill="#EB001B"/><circle cx="23" cy="12" r="8" fill="#F79E1B"/><path d="M18 6.3a8 8 0 010 11.4A8 8 0 0118 6.3z" fill="#FF5F00"/></svg>
-                    <!-- Amex -->
                     <svg viewBox="0 0 44 16" class="h-4"><rect width="44" height="16" rx="3" fill="#2E77BC"/><text x="4" y="12" font-family="Inter" font-weight="700" font-size="9" fill="white" letter-spacing=".5">AMEX</text></svg>
-                    <!-- Apple Pay -->
                     <svg viewBox="0 0 42 20" class="h-4"><rect width="42" height="20" rx="3" fill="#000"/><text x="5" y="15" font-family="Inter" font-weight="600" font-size="10" fill="white"> Pay</text></svg>
-                    <!-- Google Pay -->
                     <svg viewBox="0 0 52 20" class="h-4"><rect width="52" height="20" rx="3" fill="#fff" stroke="#e0e0e0"/><text x="4" y="14" font-family="Inter" font-weight="600" font-size="9.5" fill="#5f6368">G<tspan fill="#4285F4">o</tspan><tspan fill="#EA4335">o</tspan><tspan fill="#FBBC04">g</tspan><tspan fill="#34A853">l</tspan><tspan fill="#4285F4">e</tspan> Pay</text></svg>
-                    <!-- OXXO -->
                     <svg viewBox="0 0 44 20" class="h-4"><rect width="44" height="20" rx="3" fill="#E31837"/><text x="5" y="15" font-family="Inter" font-weight="800" font-size="11" fill="white">OXXO</text></svg>
-                    <!-- Klarna -->
                     <svg viewBox="0 0 52 20" class="h-4"><rect width="52" height="20" rx="3" fill="#FFB3C7"/><text x="6" y="14" font-family="Inter" font-weight="700" font-size="10" fill="#17120F">klarna</text></svg>
                   </div>
                   <div class="text-[13px] text-ink-600 leading-relaxed">
-                    El pago se procesa de forma segura en la plataforma de Stripe. Podrás pagar con tarjeta, Apple Pay, Google Pay, OXXO o en <strong>cuotas vía Klarna</strong> — sin salir del sitio.
+                    Tarjeta, Apple Pay, Google Pay, OXXO o <strong>cuotas vía Klarna</strong>. El checkout abre como ventana segura — sin salir de esta página.
                   </div>
                   <div class="flex items-center gap-2 text-[11px] text-ink-300">
                     <i data-lucide="lock" class="w-3.5 h-3.5 flex-shrink-0"></i>
@@ -4224,12 +4218,15 @@ también recibes.</h2>
             <!-- Submit -->
             <button type="submit" id="ck-submit-btn" class="rosegold-btn w-full py-5 rounded-lg font-semibold text-[13px] tracking-[.18em] uppercase flex items-center justify-center gap-3">
               <i data-lucide="lock" class="w-4 h-4" id="ck-submit-icon"></i>
-              <span id="ck-submit-label">Pagar con Stripe · $<span id="btn-total">69</span> USD</span>
+              <span id="ck-submit-label">Ir a pagar · $<span id="btn-total">69</span> USD</span>
             </button>
 
             <p class="text-[11.5px] text-ink-300 text-center leading-relaxed">
               Al continuar aceptas los <a href="#" class="underline text-wine-700">Términos</a> y nuestra <a href="#" class="underline text-wine-700">Política de Privacidad</a>.
             </p>
+
+            <!-- Stripe Buy Button — hidden, triggered programmatically -->
+            <div id="stripe-buy-button-wrap" aria-hidden="true" style="position:absolute;visibility:hidden;width:1px;height:1px;overflow:hidden;pointer-events:none;"></div>
           </form>
         </div>
       </div>
@@ -4431,19 +4428,34 @@ payCards.forEach(card=>{
   card.addEventListener('click', ()=> selectPayment(card.dataset.method));
 });
 
-/* ── Stripe Payment Links ── */
+/* ── Stripe config ── */
+const PREVENTA_DEADLINE = new Date('2026-05-30T05:59:59Z'); /* 29-may 23:59 CDMX */
+const STRIPE_PK = 'pk_live_51Ola85DcmQbLuME7kAzWSIHPGslAwV7mAT5tpUEIQStudkIOJMM01XMzweElt1LrIacKaDFnuXdHAvcwtgj678H600zYWuH6Zp';
+const STRIPE_BTN_IDS = {
+  preventa: 'buy_btn_1TTsP9DcmQbLuME7RonCaW0F',
+  regular:  'buy_btn_1TTsHkDcmQbLuME747mOg1pi'
+};
+/* Stripe Payment Links (popup fallback) */
 const STRIPE_LINKS = {
   preventa: 'https://buy.stripe.com/aFa6oH3cY8YSg1g7O51wY17',
   regular:  'https://buy.stripe.com/8x27sL3cYa2W2aq4BT1wY18'
 };
-const PREVENTA_DEADLINE = new Date('2026-05-30T05:59:59Z'); /* 29-may 23:59 CDMX */
-function getStripeLink(){
-  return new Date() < PREVENTA_DEADLINE ? STRIPE_LINKS.preventa : STRIPE_LINKS.regular;
-}
+function getStripeLink(){ return new Date() < PREVENTA_DEADLINE ? STRIPE_LINKS.preventa : STRIPE_LINKS.regular; }
+
+/* Inject the correct Buy Button into the hidden wrapper */
+(function initStripeBuyButton(){
+  const wrap = document.getElementById('stripe-buy-button-wrap');
+  if(!wrap) return;
+  const btnId = new Date() < PREVENTA_DEADLINE ? STRIPE_BTN_IDS.preventa : STRIPE_BTN_IDS.regular;
+  const el = document.createElement('stripe-buy-button');
+  el.setAttribute('buy-button-id', btnId);
+  el.setAttribute('publishable-key', STRIPE_PK);
+  wrap.appendChild(el);
+})();
 
 /* ── Button label map ── */
 const SUBMIT_LABELS = {
-  stripe:        () => `Pagar con Stripe · $${document.getElementById('btn-total').textContent} USD`,
+  stripe:        () => `Ir a pagar · $${document.getElementById('btn-total').textContent} USD`,
   mercadopago:   () => 'Continuar con Mercado Pago →',
   transferencia: () => 'Enviar comprobante por WhatsApp →'
 };
@@ -4503,13 +4515,13 @@ function handleCheckout(e){
   const method = document.querySelector('.pay-card[data-selected="true"]')?.dataset.method || 'stripe';
 
   if(method === 'stripe'){
+    /* Open Stripe checkout — pre-fills email, opens in a focused window */
     const url = getStripeLink();
-    /* Pre-fill email if possible via query param */
     const email = document.getElementById('ck-email')?.value?.trim();
-    const final = email ? url + (url.includes('?') ? '&' : '?') + 'prefilled_email=' + encodeURIComponent(email) : url;
-    const w=500, h=750, left=Math.round((screen.width-w)/2), top=Math.round((screen.height-h)/2);
-    const popup = window.open(final,'stripe_checkout',`width=${w},height=${h},left=${left},top=${top},scrollbars=yes,resizable=yes`);
-    if(!popup){ window.open(final,'_blank'); } /* fallback if popup blocked */
+    const final = email ? url + '?prefilled_email=' + encodeURIComponent(email) : url;
+    const w=500, h=780, L=Math.round((screen.width-w)/2), T=Math.round((screen.height-h)/2);
+    const pop = window.open(final,'stripe_checkout',`width=${w},height=${h},left=${L},top=${T},scrollbars=yes,resizable=yes`);
+    if(!pop) window.open(final,'_blank'); /* fallback if popup blocked */
     return;
   }
 
