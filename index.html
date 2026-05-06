@@ -4470,19 +4470,46 @@ function openWhatsAppComprobante(){
   window.open(`https://wa.me/528110240368?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
+/* ── Google Sheets webhook ── */
+const WEBHOOK_URL = 'https://script.google.com/a/macros/institutosanamente.com/s/AKfycbxgLaLHsCrR30oRuV3an9kF_RL33cBGKjlRncH-6GbYMlCgCNdRg3Kl3bKaLBP4k96b/exec';
+
+function sendToWebhook(payload){
+  try {
+    fetch(WEBHOOK_URL, {
+      method:  'POST',
+      mode:    'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body:    JSON.stringify(payload)
+    });
+  } catch(err){ /* silencioso — nunca bloquear el pago */ }
+}
+
 /* Checkout submission */
 function handleCheckout(e){
   e.preventDefault();
-  const method = document.querySelector('.pay-card[data-selected="true"]')?.dataset.method || 'stripe';
+  const method   = document.querySelector('.pay-card[data-selected="true"]')?.dataset.method || 'stripe';
+  const nombre   = document.getElementById('ck-nombre')?.value?.trim()   || '';
+  const apellido = document.getElementById('ck-apellido')?.value?.trim() || '';
+  const email    = document.getElementById('ck-email')?.value?.trim()    || '';
+  const wa       = document.getElementById('ck-wa')?.value?.trim()       || '';
+  const monto    = document.getElementById('ck-total')?.textContent      || '69';
+
+  /* Registrar en Google Sheets antes de abrir el pago */
+  sendToWebhook({
+    nombre, apellido, email,
+    whatsapp: wa,
+    metodo:   method === 'stripe' ? 'Stripe (tarjeta / Apple Pay / Google Pay)' : 'Transferencia AFIRME',
+    monto,
+    estado:   method === 'stripe' ? 'Pago iniciado' : 'Pendiente comprobante',
+    notas:    method === 'stripe' ? 'Checkout Stripe abierto' : 'Comprobante enviado por WhatsApp'
+  });
 
   if(method === 'stripe'){
-    /* Open Stripe checkout — pre-fills email, opens in a focused window */
-    const url = getStripeLink();
-    const email = document.getElementById('ck-email')?.value?.trim();
+    const url   = getStripeLink();
     const final = email ? url + '?prefilled_email=' + encodeURIComponent(email) : url;
     const w=500, h=780, L=Math.round((screen.width-w)/2), T=Math.round((screen.height-h)/2);
     const pop = window.open(final,'stripe_checkout',`width=${w},height=${h},left=${L},top=${T},scrollbars=yes,resizable=yes`);
-    if(!pop) window.open(final,'_blank'); /* fallback if popup blocked */
+    if(!pop) window.open(final,'_blank');
     return;
   }
 
