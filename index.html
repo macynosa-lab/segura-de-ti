@@ -4463,11 +4463,12 @@ function openWhatsAppComprobante(){
   const wa      = (document.getElementById('ck-wa')?.value || '').trim();
   const precio  = document.getElementById('ck-total')?.textContent || '69';
   const full    = [nombre, apellido].filter(Boolean).join(' ') || '(sin nombre)';
-  const msg = `Hola Wendy 👋 Me acabo de inscribir al Workshop *Segura de Ti*.\n\n` +
-              `🌸 *Nombre:* ${full}\n📧 *Email:* ${email || '(sin email)'}\n` +
-              (wa ? `📱 *WhatsApp:* ${wa}\n` : '') +
-              `💳 *Monto transferido:* $${precio} USD\n\n` +
-              `Te adjunto mi comprobante de transferencia. 🙏`;
+  const msg = `Hola Wendy, me acabo de inscribir al Workshop Segura de Ti.\n\n` +
+              `Nombre: ${full}\n` +
+              `Email: ${email || '(sin email)'}\n` +
+              (wa ? `WhatsApp: ${wa}\n` : '') +
+              `Monto transferido: $${precio} USD\n\n` +
+              `Te adjunto el comprobante de transferencia.`;
   window.open(`https://wa.me/528110240368?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
