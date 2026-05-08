@@ -4523,9 +4523,15 @@ function handleCheckout(e){
   if(method === 'stripe'){
     const url   = getStripeLink();
     const final = email ? url + '?prefilled_email=' + encodeURIComponent(email) : url;
+    /* En navegadores de Instagram/Facebook window.open() está bloqueado — redirigir directo */
+    const isInAppBrowser = /Instagram|FBAN|FBAV|FB_IAB|Line|KAKAOTALK/i.test(navigator.userAgent);
+    if(isInAppBrowser){
+      window.location.href = final;
+      return;
+    }
     const w=500, h=780, L=Math.round((screen.width-w)/2), T=Math.round((screen.height-h)/2);
     const pop = window.open(final,'stripe_checkout',`width=${w},height=${h},left=${L},top=${T},scrollbars=yes,resizable=yes`);
-    if(!pop) window.open(final,'_blank');
+    if(!pop) window.location.href = final; /* fallback si popup bloqueado */
     return;
   }
 
