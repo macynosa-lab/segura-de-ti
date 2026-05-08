@@ -4306,11 +4306,17 @@ Regálate la oportunidad de conocerte, de sanar y de convertirte en una versión
 <script>
 lucide.createIcons();
 
-/* Scroll reveal */
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: .12, rootMargin: '0px 0px -8% 0px' });
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+/* Scroll reveal — con fallback para navegadores in-app (Instagram, Facebook, etc.) */
+const isInAppBrowser = /Instagram|FBAN|FBAV|FB_IAB|FB4A|FBIOS|FBSS|Line|KAKAOTALK|Twitter|LinkedInApp/i.test(navigator.userAgent);
+if (isInAppBrowser || !('IntersectionObserver' in window)) {
+  /* En navegadores in-app, mostrar todo el contenido inmediatamente */
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+} else {
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .12, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}
 
 /* Countdown — preventa cierra 29 mayo 2026 23:59:59 CDMX (UTC-6) */
 function startCountdown(){
