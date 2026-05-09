@@ -4481,7 +4481,7 @@ function getStripeLink(){ return new Date() < PREVENTA_DEADLINE ? STRIPE_LINKS.p
 
 /* ── Button label map ── */
 const SUBMIT_LABELS = {
-  stripe:        () => `Ir a pagar · $${document.getElementById('btn-total').textContent} USD`,
+  stripe:        () => `Ir a pagar · $${document.getElementById('ck-total')?.textContent || document.getElementById('btn-total')?.textContent || '69'} USD`,
   transferencia: () => 'Enviar comprobante por WhatsApp →'
 };
 const SUBMIT_ICONS = {
