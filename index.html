@@ -4335,6 +4335,23 @@ if (isInAppBrowser || !('IntersectionObserver' in window)) {
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 }
 
+/* Meta Pixel — ViewContent: cuando el usuario llega a la sección de pago */
+(function(){
+  const checkoutSection = document.getElementById('checkout');
+  if(!checkoutSection || typeof fbq === 'undefined') return;
+  let fired = false;
+  const vcObs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting && !fired){
+        fired = true;
+        fbq('track', 'ViewContent', { content_name: 'Workshop Segura de Ti', currency: 'USD', value: 69 });
+        vcObs.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  vcObs.observe(checkoutSection);
+})();
+
 /* Countdown — preventa cierra 29 mayo 2026 23:59:59 CDMX (UTC-6) */
 function startCountdown(){
   const target = new Date('2026-05-30T05:59:59Z'); /* 29-may 23:59 CDMX = 30-may 05:59 UTC */
@@ -4533,6 +4550,11 @@ function handleCheckout(e){
   const wa       = document.getElementById('ck-wa')?.value?.trim()       || '';
   const monto    = document.getElementById('ck-total')?.textContent      || '69';
 
+  /* Meta Pixel — InitiateCheckout */
+  if(typeof fbq !== 'undefined'){
+    fbq('track', 'InitiateCheckout', { content_name: 'Workshop Segura de Ti', currency: 'USD', value: 69, num_items: 1 });
+  }
+
   /* Registrar en Google Sheets antes de abrir el pago */
   sendToWebhook({
     nombre, apellido, email,
@@ -4544,6 +4566,10 @@ function handleCheckout(e){
   });
 
   if(method === 'stripe'){
+    /* Meta Pixel — Purchase (intención confirmada al abrir Stripe) */
+    if(typeof fbq !== 'undefined'){
+      fbq('track', 'Purchase', { content_name: 'Workshop Segura de Ti', currency: 'USD', value: 69 });
+    }
     const url   = getStripeLink();
     const final = email ? url + '?prefilled_email=' + encodeURIComponent(email) : url;
     /* En navegadores de Instagram/Facebook window.open() está bloqueado — redirigir directo */
@@ -4559,6 +4585,10 @@ function handleCheckout(e){
   }
 
   if(method === 'transferencia'){
+    /* Meta Pixel — Lead (eligió transferencia, intención sin pago digital) */
+    if(typeof fbq !== 'undefined'){
+      fbq('track', 'Lead', { content_name: 'Workshop Segura de Ti', currency: 'USD', value: 69 });
+    }
     openWhatsAppComprobante();
     return;
   }
