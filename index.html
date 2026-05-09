@@ -4566,8 +4566,9 @@ function handleCheckout(e){
   });
 
   if(method === 'stripe'){
-    /* Meta Pixel — Purchase (intención confirmada al abrir Stripe) */
+    /* Meta Pixel — Lead + Purchase para Stripe */
     if(typeof fbq !== 'undefined'){
+      fbq('track', 'Lead',     { content_name: 'Workshop Segura de Ti', currency: 'USD', value: 69 });
       fbq('track', 'Purchase', { content_name: 'Workshop Segura de Ti', currency: 'USD', value: 69 });
     }
     const url   = getStripeLink();
@@ -4585,9 +4586,10 @@ function handleCheckout(e){
   }
 
   if(method === 'transferencia'){
-    /* Meta Pixel — Lead (eligió transferencia, intención sin pago digital) */
+    /* Meta Pixel — Lead + Purchase para Transferencia */
     if(typeof fbq !== 'undefined'){
-      fbq('track', 'Lead', { content_name: 'Workshop Segura de Ti', currency: 'USD', value: 69 });
+      fbq('track', 'Lead',     { content_name: 'Workshop Segura de Ti', currency: 'USD', value: 69 });
+      fbq('track', 'Purchase', { content_name: 'Workshop Segura de Ti', currency: 'USD', value: 69 });
     }
     openWhatsAppComprobante();
     return;
