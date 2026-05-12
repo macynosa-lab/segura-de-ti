@@ -4615,6 +4615,88 @@ window.addEventListener('scroll', ()=>{
   mobCta.style.transform = show ? 'translateY(0)' : 'translateY(100%)';
 });
 
+/* ── Tracking de comportamiento → GA4 ── */
+(function(){
+  if(typeof gtag === 'undefined') return;
+
+  /* 1. Profundidad de scroll — saber hasta dónde leen */
+  const scrollFired = new Set();
+  window.addEventListener('scroll', function(){
+    const pct = Math.round(window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100);
+    [25, 50, 75, 90].forEach(function(mark){
+      if(pct >= mark && !scrollFired.has(mark)){
+        scrollFired.add(mark);
+        gtag('event', 'scroll_depth', { depth: mark, depth_label: mark + '%' });
+      }
+    });
+  }, { passive: true });
+
+  /* 2. Clics en CTAs de inscripción */
+  document.querySelectorAll('a[href="#checkout"]').forEach(function(el){
+    el.addEventListener('click', function(){
+      gtag('event', 'cta_click', { cta_label: (el.textContent||'').trim().substring(0,60), ubicacion: el.closest('section')?.id || 'nav' });
+    });
+  });
+
+  /* 3. Método de pago seleccionado */
+  document.querySelectorAll('.pay-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      gtag('event', 'metodo_pago_seleccionado', { metodo: card.dataset.method });
+    });
+  });
+
+  /* 4. Inicio del formulario de checkout */
+  const ckNombre = document.getElementById('ck-nombre');
+  if(ckNombre){
+    let formStarted = false;
+    ckNombre.addEventListener('focus', function(){
+      if(!formStarted){ formStarted = true; gtag('event', 'checkout_form_start'); }
+    });
+  }
+
+  /* 5. Secciones clave vistas — saber qué leen */
+  const seccionesImportantes = [
+    { id: 'workshop',      label: 'Que incluye el workshop' },
+    { id: 'testimonios',   label: 'Testimonios' },
+    { id: 'incluye',       label: 'Que incluye' },
+    { id: 'bonos',         label: 'Bonos extra' },
+    { id: 'wendy',         label: 'Sobre Wendy' },
+    { id: 'checkout',      label: 'Seccion de pago' },
+    { id: 'faq',           label: 'Preguntas frecuentes' }
+  ];
+  if('IntersectionObserver' in window){
+    const secObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          gtag('event', 'seccion_vista', { seccion: e.target.dataset.trackLabel });
+          secObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    seccionesImportantes.forEach(function(s){
+      const el = document.getElementById(s.id);
+      if(el){ el.dataset.trackLabel = s.label; secObs.observe(el); }
+    });
+  }
+
+  /* 6. Tiempo en página — saber si se quedan o se van */
+  [30, 60, 120, 180].forEach(function(seg){
+    setTimeout(function(){ gtag('event', 'tiempo_en_pagina', { segundos: seg }); }, seg * 1000);
+  });
+
+  /* 7. Video reproducido */
+  const video = document.querySelector('video');
+  if(video){
+    let videoFired = false;
+    video.addEventListener('play', function(){
+      if(!videoFired){ videoFired = true; gtag('event', 'video_play', { video: 'wendy_historia' }); }
+    });
+    video.addEventListener('ended', function(){
+      gtag('event', 'video_completado', { video: 'wendy_historia' });
+    });
+  }
+})();
+
 /* ─────────────────────────────────────── */
 /* TWEAKS / EDIT MODE INTEGRATION          */
 /* ─────────────────────────────────────── */
