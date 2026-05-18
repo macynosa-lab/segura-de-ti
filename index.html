@@ -4572,17 +4572,31 @@ function selectPayment(method){
 
 /* WhatsApp comprobante helper */
 function openWhatsAppComprobante(){
-  const nombre  = (document.getElementById('ck-nombre')?.value || '').trim();
-  const apellido= (document.getElementById('ck-apellido')?.value || '').trim();
-  const email   = (document.getElementById('ck-email')?.value || '').trim();
-  const wa      = (document.getElementById('ck-wa')?.value || '').trim();
-  const precio  = document.getElementById('ck-total')?.textContent || '69';
-  const full    = [nombre, apellido].filter(Boolean).join(' ') || '(sin nombre)';
+  const nombre   = (document.getElementById('ck-nombre')?.value || '').trim();
+  const apellido = (document.getElementById('ck-apellido')?.value || '').trim();
+  const email    = (document.getElementById('ck-email')?.value || '').trim();
+  const wa       = (document.getElementById('ck-wa')?.value || '').trim();
+  const full     = [nombre, apellido].filter(Boolean).join(' ') || '(sin nombre)';
+
+  /* Detectar moneda y monto según método */
+  const method         = document.querySelector('.pay-card[data-selected="true"]')?.dataset.method || 'transferencia';
+  const stripeCurrency = document.querySelector('input[name="stripe-currency"]:checked')?.value || 'usd';
+  const isPreventa     = new Date() < PREVENTA_DEADLINE;
+
+  let montoStr;
+  if(method === 'transferencia'){
+    montoStr = isPreventa ? '$1,189 MXN' : '$2,378 MXN';
+  } else if(stripeCurrency === 'mxn'){
+    montoStr = isPreventa ? '$1,189 MXN' : '$2,378 MXN';
+  } else {
+    montoStr = `$${document.getElementById('ck-total')?.textContent || '69'} USD`;
+  }
+
   const msg = `Hola Wendy, me acabo de inscribir al Workshop Segura de Ti.\n\n` +
               `Nombre: ${full}\n` +
               `Email: ${email || '(sin email)'}\n` +
               (wa ? `WhatsApp: ${wa}\n` : '') +
-              `Monto transferido: $${precio} USD\n\n` +
+              `Monto transferido: ${montoStr}\n\n` +
               `Te adjunto el comprobante de transferencia.`;
   window.open(`https://wa.me/528110240368?text=${encodeURIComponent(msg)}`, '_blank');
 }
