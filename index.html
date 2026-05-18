@@ -4185,6 +4185,28 @@ Regálate la oportunidad de conocerte, de sanar y de convertirte en una versión
                     Encriptación SSL 256-bit · No almacenamos datos de tarjeta
                   </div>
                 </div>
+                <!-- Selector de moneda -->
+                <div class="mt-3 rounded-xl border border-amber-400/30 bg-amber-50/60 p-4">
+                  <p class="text-[12px] font-semibold text-amber-800 mb-3">¿Tu tarjeta no acepta pagos en dólares? Elige tu moneda:</p>
+                  <div class="flex flex-col gap-2.5">
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                      <input type="radio" name="stripe-currency" value="usd" checked
+                        class="w-4 h-4 accent-wine-700 cursor-pointer">
+                      <span class="text-[13px] text-ink-700 group-has-[:checked]:font-semibold">
+                        <span class="font-semibold text-wine-950">$69 USD</span>
+                        <span class="text-ink-400 ml-1">· tarjetas internacionales</span>
+                      </span>
+                    </label>
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                      <input type="radio" name="stripe-currency" value="mxn"
+                        class="w-4 h-4 accent-wine-700 cursor-pointer">
+                      <span class="text-[13px] text-ink-700">
+                        <span class="font-semibold text-wine-950" id="mxn-price-label">$1,189 MXN</span>
+                        <span class="text-ink-400 ml-1">· tarjetas mexicanas</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
               </div>
 
               <!-- ── Transferencia panel ── -->
@@ -4473,12 +4495,22 @@ const STRIPE_BTN_IDS = {
   preventa: 'buy_btn_1TTsP9DcmQbLuME7RonCaW0F',
   regular:  'buy_btn_1TTsHkDcmQbLuME747mOg1pi'
 };
-/* Stripe Payment Links (popup fallback) */
+/* Stripe Payment Links USD (popup fallback) */
 const STRIPE_LINKS = {
   preventa: 'https://buy.stripe.com/aFa6oH3cY8YSg1g7O51wY17',
   regular:  'https://buy.stripe.com/8x27sL3cYa2W2aq4BT1wY18'
 };
-function getStripeLink(){ return new Date() < PREVENTA_DEADLINE ? STRIPE_LINKS.preventa : STRIPE_LINKS.regular; }
+/* Stripe Payment Links MXN */
+const STRIPE_LINKS_MXN = {
+  preventa: 'https://buy.stripe.com/dRm8wP28U2Au5mC5FX1wY19',
+  regular:  'https://buy.stripe.com/cNi8wP3cYa2WbL00lD1wY1a'
+};
+function getStripeLink(){
+  const currency = document.querySelector('input[name="stripe-currency"]:checked')?.value || 'usd';
+  const isPreventa = new Date() < PREVENTA_DEADLINE;
+  if(currency === 'mxn') return isPreventa ? STRIPE_LINKS_MXN.preventa : STRIPE_LINKS_MXN.regular;
+  return isPreventa ? STRIPE_LINKS.preventa : STRIPE_LINKS.regular;
+}
 
 /* Inject the correct Buy Button into the hidden wrapper */
 (function initStripeBuyButton(){
@@ -4493,7 +4525,13 @@ function getStripeLink(){ return new Date() < PREVENTA_DEADLINE ? STRIPE_LINKS.p
 
 /* ── Button label map ── */
 const SUBMIT_LABELS = {
-  stripe:        () => `Ir a pagar · $${document.getElementById('ck-total')?.textContent || document.getElementById('btn-total')?.textContent || '69'} USD`,
+  stripe: () => {
+    const currency   = document.querySelector('input[name="stripe-currency"]:checked')?.value || 'usd';
+    const isPreventa = new Date() < PREVENTA_DEADLINE;
+    if(currency === 'mxn') return isPreventa ? 'Ir a pagar · $1,189 MXN' : 'Ir a pagar · $2,378 MXN';
+    const precio = document.getElementById('ck-total')?.textContent || document.getElementById('btn-total')?.textContent || '69';
+    return `Ir a pagar · $${precio} USD`;
+  },
   transferencia: () => 'Enviar comprobante por WhatsApp →'
 };
 const SUBMIT_ICONS = {
@@ -4520,6 +4558,17 @@ function selectPayment(method){
   if(panel) panel.classList.remove('hidden');
   updateSubmitBtn(method);
 }
+
+/* Actualizar precio MXN según fecha y escuchar cambio de moneda */
+(function initCurrencySelector(){
+  const mxnLabel = document.getElementById('mxn-price-label');
+  if(mxnLabel){
+    mxnLabel.textContent = new Date() < PREVENTA_DEADLINE ? '$1,189 MXN' : '$2,378 MXN';
+  }
+  document.querySelectorAll('input[name="stripe-currency"]').forEach(radio => {
+    radio.addEventListener('change', () => updateSubmitBtn('stripe'));
+  });
+})();
 
 /* WhatsApp comprobante helper */
 function openWhatsAppComprobante(){
@@ -4567,14 +4616,23 @@ function handleCheckout(e){
     fbq('track', 'InitiateCheckout', { content_name: 'Workshop Segura de Ti', currency: 'USD', value: 69, num_items: 1 });
   }
 
+  /* Detectar moneda seleccionada en Stripe */
+  const stripeCurrency = document.querySelector('input[name="stripe-currency"]:checked')?.value || 'usd';
+  const isPreventa     = new Date() < PREVENTA_DEADLINE;
+  const montoFinal     = method === 'stripe' && stripeCurrency === 'mxn'
+    ? (isPreventa ? 1189 : 2378)
+    : monto;
+  const monedaLabel    = method === 'stripe' && stripeCurrency === 'mxn' ? 'MXN' : 'USD';
+
   /* Registrar en Google Sheets antes de abrir el pago */
   sendToWebhook({
     nombre, apellido, email,
     whatsapp: wa,
-    metodo:   method === 'stripe' ? 'Stripe (tarjeta / Apple Pay / Google Pay)' : 'Transferencia AFIRME',
-    monto,
-    estado:   method === 'stripe' ? 'Pago iniciado' : 'Pendiente comprobante',
-    notas:    method === 'stripe' ? 'Checkout Stripe abierto' : 'Comprobante enviado por WhatsApp'
+    metodo:   method === 'stripe'
+      ? `Stripe ${stripeCurrency.toUpperCase()} (tarjeta / Apple Pay / Google Pay)`
+      : 'Transferencia AFIRME',
+    monto:    montoFinal,
+    notas:    method === 'stripe' ? `Checkout Stripe abierto · ${monedaLabel}` : 'Comprobante enviado por WhatsApp'
   });
 
   if(method === 'stripe'){
